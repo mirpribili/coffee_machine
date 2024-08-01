@@ -1,0 +1,204 @@
+2024-08-02 00:14:42,055 [main] DEBUG: Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-02 00:14:42,984 [main] DEBUG: Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7
+2024-08-02 00:14:43,092 [main] DEBUG: HikariPool-1 - configuration:
+2024-08-02 00:14:43,094 [main] DEBUG: allowPoolSuspension.............false
+2024-08-02 00:14:43,094 [main] DEBUG: autoCommit......................true
+2024-08-02 00:14:43,094 [main] DEBUG: catalog.........................none
+2024-08-02 00:14:43,094 [main] DEBUG: connectionInitSql...............none
+2024-08-02 00:14:43,094 [main] DEBUG: connectionTestQuery.............none
+2024-08-02 00:14:43,095 [main] DEBUG: connectionTimeout...............30000
+2024-08-02 00:14:43,095 [main] DEBUG: dataSource......................none
+2024-08-02 00:14:43,095 [main] DEBUG: dataSourceClassName.............none
+2024-08-02 00:14:43,096 [main] DEBUG: dataSourceJNDI..................none
+2024-08-02 00:14:43,096 [main] DEBUG: dataSourceProperties............{password=<masked>}
+2024-08-02 00:14:43,096 [main] DEBUG: driverClassName................."org.postgresql.Driver"
+2024-08-02 00:14:43,096 [main] DEBUG: exceptionOverrideClassName......none
+2024-08-02 00:14:43,096 [main] DEBUG: healthCheckProperties...........{}
+2024-08-02 00:14:43,097 [main] DEBUG: healthCheckRegistry.............none
+2024-08-02 00:14:43,097 [main] DEBUG: idleTimeout.....................600000
+2024-08-02 00:14:43,097 [main] DEBUG: initializationFailTimeout.......1
+2024-08-02 00:14:43,097 [main] DEBUG: isolateInternalQueries..........false
+2024-08-02 00:14:43,097 [main] DEBUG: jdbcUrl.........................jdbc:postgresql://localhost:5432/coffee_machine
+2024-08-02 00:14:43,097 [main] DEBUG: keepaliveTime...................0
+2024-08-02 00:14:43,097 [main] DEBUG: leakDetectionThreshold..........0
+2024-08-02 00:14:43,097 [main] DEBUG: maxLifetime.....................1800000
+2024-08-02 00:14:43,097 [main] DEBUG: maximumPoolSize.................10
+2024-08-02 00:14:43,098 [main] DEBUG: metricRegistry..................none
+2024-08-02 00:14:43,098 [main] DEBUG: metricsTrackerFactory...........none
+2024-08-02 00:14:43,098 [main] DEBUG: minimumIdle.....................10
+2024-08-02 00:14:43,098 [main] DEBUG: password........................<masked>
+2024-08-02 00:14:43,098 [main] DEBUG: poolName........................"HikariPool-1"
+2024-08-02 00:14:43,098 [main] DEBUG: readOnly........................false
+2024-08-02 00:14:43,098 [main] DEBUG: registerMbeans..................false
+2024-08-02 00:14:43,098 [main] DEBUG: scheduledExecutor...............none
+2024-08-02 00:14:43,098 [main] DEBUG: schema..........................none
+2024-08-02 00:14:43,098 [main] DEBUG: threadFactory...................internal
+2024-08-02 00:14:43,098 [main] DEBUG: transactionIsolation............default
+2024-08-02 00:14:43,099 [main] DEBUG: username........................"admin"
+2024-08-02 00:14:43,099 [main] DEBUG: validationTimeout...............5000
+2024-08-02 00:14:43,442 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4f84742d
+2024-08-02 00:14:43,446 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=2, active=2, idle=0, waiting=0)
+2024-08-02 00:14:43,472 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=2, active=0, idle=2, waiting=0)
+2024-08-02 00:14:43,501 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@414383ad
+2024-08-02 00:14:43,532 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=3, active=0, idle=3, waiting=0)
+2024-08-02 00:14:43,563 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@457c1f5d
+2024-08-02 00:14:43,594 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=4, active=0, idle=4, waiting=0)
+2024-08-02 00:14:43,627 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7e8996
+2024-08-02 00:14:43,657 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=5, active=0, idle=5, waiting=0)
+2024-08-02 00:14:43,685 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@14177ff4
+2024-08-02 00:14:43,716 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=6, active=0, idle=6, waiting=0)
+2024-08-02 00:14:43,748 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@605176d9
+2024-08-02 00:14:43,779 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=7, active=0, idle=7, waiting=0)
+2024-08-02 00:14:43,805 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3132a89b
+2024-08-02 00:14:43,836 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=8, active=0, idle=8, waiting=0)
+2024-08-02 00:14:43,861 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2054119d
+2024-08-02 00:14:43,891 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=9, active=0, idle=9, waiting=0)
+2024-08-02 00:14:43,923 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@f1332bc
+2024-08-02 00:14:43,953 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:14:43,954 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:14:43,954 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:15:13,446 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:15:13,446 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:15:43,447 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:15:43,447 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:16:13,447 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:16:13,448 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:16:43,448 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:16:43,448 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:17:13,449 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:17:13,449 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:17:43,449 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:17:43,450 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:18:13,450 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:18:13,450 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:18:43,450 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:18:43,451 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:19:13,451 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:19:13,451 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:19:43,451 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:19:43,451 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:20:13,452 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:20:13,452 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:20:43,452 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:20:43,452 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:21:13,453 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:21:13,453 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:21:43,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:21:43,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:22:13,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:22:13,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:22:43,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:22:43,454 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:23:13,455 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:23:13,455 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:23:43,455 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:23:43,456 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:24:13,456 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:24:13,456 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:24:43,456 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:24:43,456 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:25:13,457 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:25:13,457 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:25:43,457 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:25:43,457 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:26:13,457 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:26:13,458 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:26:43,458 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:26:43,458 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:27:13,458 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:27:13,459 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:27:43,459 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:27:43,459 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:28:13,459 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:28:13,459 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:28:43,460 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:28:43,460 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:29:13,460 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:29:13,461 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:29:43,461 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:29:43,461 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:29:55,181 [SpringApplicationShutdownHook] DEBUG: HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:29:55,183 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@4f64d9cb: (connection evicted)
+2024-08-02 00:29:55,187 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@4f84742d: (connection evicted)
+2024-08-02 00:29:55,188 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@414383ad: (connection evicted)
+2024-08-02 00:29:55,188 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@457c1f5d: (connection evicted)
+2024-08-02 00:29:55,189 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7e8996: (connection evicted)
+2024-08-02 00:29:55,192 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@14177ff4: (connection evicted)
+2024-08-02 00:29:55,193 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@605176d9: (connection evicted)
+2024-08-02 00:29:55,195 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@3132a89b: (connection evicted)
+2024-08-02 00:29:55,196 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2054119d: (connection evicted)
+2024-08-02 00:29:55,198 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@f1332bc: (connection evicted)
+2024-08-02 00:29:55,200 [SpringApplicationShutdownHook] DEBUG: HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2024-08-02 00:29:57,684 [main] DEBUG: Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-02 00:29:58,653 [main] DEBUG: Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7
+2024-08-02 00:29:58,770 [main] DEBUG: HikariPool-1 - configuration:
+2024-08-02 00:29:58,774 [main] DEBUG: allowPoolSuspension.............false
+2024-08-02 00:29:58,774 [main] DEBUG: autoCommit......................true
+2024-08-02 00:29:58,774 [main] DEBUG: catalog.........................none
+2024-08-02 00:29:58,774 [main] DEBUG: connectionInitSql...............none
+2024-08-02 00:29:58,774 [main] DEBUG: connectionTestQuery.............none
+2024-08-02 00:29:58,775 [main] DEBUG: connectionTimeout...............30000
+2024-08-02 00:29:58,775 [main] DEBUG: dataSource......................none
+2024-08-02 00:29:58,775 [main] DEBUG: dataSourceClassName.............none
+2024-08-02 00:29:58,775 [main] DEBUG: dataSourceJNDI..................none
+2024-08-02 00:29:58,776 [main] DEBUG: dataSourceProperties............{password=<masked>}
+2024-08-02 00:29:58,776 [main] DEBUG: driverClassName................."org.postgresql.Driver"
+2024-08-02 00:29:58,776 [main] DEBUG: exceptionOverrideClassName......none
+2024-08-02 00:29:58,776 [main] DEBUG: healthCheckProperties...........{}
+2024-08-02 00:29:58,776 [main] DEBUG: healthCheckRegistry.............none
+2024-08-02 00:29:58,776 [main] DEBUG: idleTimeout.....................600000
+2024-08-02 00:29:58,776 [main] DEBUG: initializationFailTimeout.......1
+2024-08-02 00:29:58,777 [main] DEBUG: isolateInternalQueries..........false
+2024-08-02 00:29:58,777 [main] DEBUG: jdbcUrl.........................jdbc:postgresql://localhost:5432/coffee_machine
+2024-08-02 00:29:58,777 [main] DEBUG: keepaliveTime...................0
+2024-08-02 00:29:58,777 [main] DEBUG: leakDetectionThreshold..........0
+2024-08-02 00:29:58,777 [main] DEBUG: maxLifetime.....................1800000
+2024-08-02 00:29:58,777 [main] DEBUG: maximumPoolSize.................10
+2024-08-02 00:29:58,777 [main] DEBUG: metricRegistry..................none
+2024-08-02 00:29:58,777 [main] DEBUG: metricsTrackerFactory...........none
+2024-08-02 00:29:58,778 [main] DEBUG: minimumIdle.....................10
+2024-08-02 00:29:58,778 [main] DEBUG: password........................<masked>
+2024-08-02 00:29:58,778 [main] DEBUG: poolName........................"HikariPool-1"
+2024-08-02 00:29:58,778 [main] DEBUG: readOnly........................false
+2024-08-02 00:29:58,778 [main] DEBUG: registerMbeans..................false
+2024-08-02 00:29:58,778 [main] DEBUG: scheduledExecutor...............none
+2024-08-02 00:29:58,778 [main] DEBUG: schema..........................none
+2024-08-02 00:29:58,778 [main] DEBUG: threadFactory...................internal
+2024-08-02 00:29:58,778 [main] DEBUG: transactionIsolation............default
+2024-08-02 00:29:58,779 [main] DEBUG: username........................"admin"
+2024-08-02 00:29:58,779 [main] DEBUG: validationTimeout...............5000
+2024-08-02 00:29:59,097 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=1, active=1, idle=0, waiting=1)
+2024-08-02 00:29:59,117 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7183cfef
+2024-08-02 00:29:59,149 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=2, active=0, idle=2, waiting=0)
+2024-08-02 00:29:59,183 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7f443faf
+2024-08-02 00:29:59,213 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=3, active=0, idle=3, waiting=0)
+2024-08-02 00:29:59,254 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7b7ba49f
+2024-08-02 00:29:59,284 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=4, active=0, idle=4, waiting=0)
+2024-08-02 00:29:59,312 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e793594
+2024-08-02 00:29:59,342 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=5, active=0, idle=5, waiting=0)
+2024-08-02 00:29:59,375 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29f48fe4
+2024-08-02 00:29:59,405 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=6, active=0, idle=6, waiting=0)
+2024-08-02 00:29:59,436 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5e56cadb
+2024-08-02 00:29:59,466 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=7, active=0, idle=7, waiting=0)
+2024-08-02 00:29:59,502 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5c761263
+2024-08-02 00:29:59,532 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=8, active=1, idle=7, waiting=0)
+2024-08-02 00:29:59,575 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3ff6d706
+2024-08-02 00:29:59,605 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=9, active=0, idle=9, waiting=0)
+2024-08-02 00:29:59,635 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@32f0e4b3
+2024-08-02 00:29:59,666 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:29:59,666 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:29:59,666 [HikariPool-1 connection adder] DEBUG: HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:30:29,097 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:30:29,097 [HikariPool-1 housekeeper] DEBUG: HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-02 00:30:39,024 [SpringApplicationShutdownHook] DEBUG: HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2024-08-02 00:30:39,025 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@852ef8d: (connection evicted)
+2024-08-02 00:30:39,026 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7183cfef: (connection evicted)
+2024-08-02 00:30:39,026 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7f443faf: (connection evicted)
+2024-08-02 00:30:39,027 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7b7ba49f: (connection evicted)
+2024-08-02 00:30:39,029 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@3e793594: (connection evicted)
+2024-08-02 00:30:39,030 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@29f48fe4: (connection evicted)
+2024-08-02 00:30:39,030 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@5e56cadb: (connection evicted)
+2024-08-02 00:30:39,030 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@5c761263: (connection evicted)
+2024-08-02 00:30:39,032 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@3ff6d706: (connection evicted)
+2024-08-02 00:30:39,032 [HikariPool-1 connection closer] DEBUG: HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@32f0e4b3: (connection evicted)
+2024-08-02 00:30:39,034 [SpringApplicationShutdownHook] DEBUG: HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
