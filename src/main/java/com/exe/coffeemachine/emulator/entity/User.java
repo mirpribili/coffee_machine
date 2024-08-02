@@ -1,5 +1,6 @@
 package com.exe.coffeemachine.emulator.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference // "родительская" ссылка
     private List<UsageLog> usageLogs;
 
     @Column(name = "created_at", updatable = false)

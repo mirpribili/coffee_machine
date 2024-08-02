@@ -1,5 +1,6 @@
 package com.exe.coffeemachine.emulator.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ public class UsageLog {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true) // Указываем, что поле может быть null
+    @JsonBackReference // "дочерняя" ссылка
     private User user;
 
     @ManyToOne
