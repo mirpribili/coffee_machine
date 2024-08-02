@@ -140,6 +140,6 @@ public class CoffeeRecipeControllerTest {
 
         mockMvc.perform(delete("/api/coffee-recipes/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.deleted").value(true));
+                .andExpect(jsonPath("$.удалено").value(true));
     }
 }
