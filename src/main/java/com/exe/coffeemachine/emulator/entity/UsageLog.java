@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 /**
  * @author user
  * @year 2024
@@ -21,14 +20,24 @@ public class UsageLog {
     private Long logId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true) // Указываем, что поле может быть null
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipe_id", nullable = true) // Указываем, что поле может быть null
     private CoffeeRecipe coffeeRecipe;
 
+    @Column(length = 20) // Указываем максимальную длину для поля status
     private String status;
+
+    @Column(precision = 10, scale = 2) // Указываем точность для поля amount
     private BigDecimal amount;
+
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

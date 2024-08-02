@@ -6,10 +6,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-/**
- * @author user
- * @year 2024
- */
 
 @Entity
 @Data
@@ -18,16 +14,22 @@ import java.time.LocalDateTime;
 public class RecipeIngredient {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
-    private CoffeeRecipe coffeeRecipe;
+    @Column(name = "recipe_id")
+    private Long coffeeRecipeId; // Поле для идентификатора рецепта
 
     @Id
+    @Column(name = "ingredient_id")
+    private Long ingredientId; // Поле для идентификатора ингредиента
+
     @ManyToOne
-    @JoinColumn(name = "ingredient_id")
+    @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
+    private CoffeeRecipe coffeeRecipe;
+
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id", insertable = false, updatable = false)
     private Ingredient ingredient;
 
-    @Column(nullable = false) // Обеспечиваем, что поле не может быть null
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @Column(name = "created_at", updatable = false)
