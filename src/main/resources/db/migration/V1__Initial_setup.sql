@@ -1,6 +1,5 @@
--- Создание таблиц
 CREATE TABLE coffee_recipe (
-                               recipe_id BIGINT PRIMARY KEY,
+                               recipe_id BIGSERIAL PRIMARY KEY,
                                name VARCHAR(100) NOT NULL,
                                description TEXT,
                                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -8,7 +7,7 @@ CREATE TABLE coffee_recipe (
 );
 
 CREATE TABLE users (
-                       user_id BIGINT PRIMARY KEY,
+                       user_id BIGSERIAL PRIMARY KEY,
                        username VARCHAR(100) NOT NULL,
                        email VARCHAR(100) NOT NULL,
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -16,12 +15,12 @@ CREATE TABLE users (
 );
 
 CREATE TABLE ingredient (
-                             ingredient_id BIGINT PRIMARY KEY,
-                             name VARCHAR(100) NOT NULL,
-                             current_quantity DECIMAL(10, 2) NOT NULL,
-                             min_quantity DECIMAL(10, 2) NOT NULL,
-                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                            ingredient_id BIGSERIAL PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL,
+                            current_quantity DECIMAL(10, 2) NOT NULL,
+                            min_quantity DECIMAL(10, 2) NOT NULL,
+                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE recipe_ingredient (
@@ -34,7 +33,7 @@ CREATE TABLE recipe_ingredient (
 );
 
 CREATE TABLE usage_log (
-                           log_id BIGINT PRIMARY KEY,
+                           log_id BIGSERIAL PRIMARY KEY,
                            user_id BIGINT REFERENCES users(user_id) ON DELETE SET NULL,
                            recipe_id BIGINT REFERENCES coffee_recipe(recipe_id) ON DELETE SET NULL,
                            status VARCHAR(20),
@@ -43,7 +42,7 @@ CREATE TABLE usage_log (
 );
 
 CREATE TABLE error_log (
-                           error_id BIGINT PRIMARY KEY,
+                           error_id BIGSERIAL PRIMARY KEY,
                            user_id BIGINT REFERENCES users(user_id) ON DELETE SET NULL,
                            error_message TEXT NOT NULL,
                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

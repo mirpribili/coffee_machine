@@ -1,5 +1,6 @@
 package com.exe.coffeemachine.emulator.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class CoffeeRecipe {
     private String description;
 
     @OneToMany(mappedBy = "coffeeRecipe", cascade = CascadeType.ALL)
+    @JsonManagedReference // "родительская" ссылка
     private List<RecipeIngredient> ingredients;
 
     @Column(name = "created_at", updatable = false)

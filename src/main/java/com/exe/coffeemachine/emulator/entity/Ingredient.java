@@ -1,5 +1,6 @@
 package com.exe.coffeemachine.emulator.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -28,6 +29,7 @@ public class Ingredient {
     private BigDecimal minQuantity;
 
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @JsonIgnore // Игнорируем это поле при сериализации
     private List<RecipeIngredient> recipeIngredients;
 
     @Column(name = "created_at", updatable = false)

@@ -1,5 +1,7 @@
 package com.exe.coffeemachine.emulator.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -23,6 +25,7 @@ public class RecipeIngredient {
 
     @ManyToOne
     @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
+    @JsonBackReference // Указывает, что это "дочерняя" ссылка
     private CoffeeRecipe coffeeRecipe;
 
     @ManyToOne
