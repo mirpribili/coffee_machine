@@ -1,5 +1,6 @@
 package com.exe.coffeemachine.emulator.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+@Hidden
 @RestController
 @RequestMapping("/")
 public class HomeController {

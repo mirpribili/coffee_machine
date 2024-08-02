@@ -5,7 +5,9 @@ import com.exe.coffeemachine.emulator.dto.UserDTO;
 import com.exe.coffeemachine.emulator.entity.CoffeeRecipe;
 import com.exe.coffeemachine.emulator.entity.User;
 import org.springframework.stereotype.Component;
+
 /**
+ * Реализация маппера для преобразования между DTO и сущностями
  * @author user
  * @year 2024
  */
@@ -45,6 +47,7 @@ public class CoffeeMachineMapperImpl implements CoffeeMachineMapper {
         dto.setUserId(user.getUserId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
+        // Добавьте здесь преобразование createdAt и updatedAt, если необходимо
         return dto;
     }
 
@@ -57,6 +60,7 @@ public class CoffeeMachineMapperImpl implements CoffeeMachineMapper {
         user.setUserId(userDTO.getUserId());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
+        // Добавьте здесь преобразование createdAt и updatedAt, если необходимо
         return user;
     }
 }
