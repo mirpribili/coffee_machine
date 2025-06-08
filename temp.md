@@ -7,6 +7,9 @@
 
 -------------------------------------------------------------------------------------------------------------------
 public void fastSort(int[] a, l, h){
+    if (array == null || low >= high || array.length == 0) {  
+        return;  
+    }  
     int middle = l + (h - l) / 2;
     int pivot = a[middle];
     int i = l;
