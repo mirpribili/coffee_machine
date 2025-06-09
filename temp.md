@@ -312,8 +312,115 @@ public static void main(String[] args) {
 hash
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2017
+public static boolean isValidSudoku(char[][] board){
+    Set<String> seen = new HashSet<>();
+    for (int i = 0; i<board.length; i++){
+        for (j = 0; j < board[0].length; j++){
+            char val = char[i][j];
+            if (val == '.') continue;
+            int blockId = (i / 3) * 3 + ( j / 3);
+            String rowKey = "r" + i + "-" + val;
+            String colKey = "l" + j + "-" + val;
+            String blockKey = "b" + blockId + "-" + val;
 
+            if(!seen.add(rowKey) || !seen.add(colKey) || !seen.add(blockKey) ) return false;
+        }
+    }
+    return true;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 2033
+public boolean isIsomorphic(String s, String t){
+    if(s.length() != t.length()) return false;
+    Map<Character, Character> mapST = new HashMap<>();
+    Map<Character, Character> mapTS = new HashMap<>();
+
+    for (int i = 0; i < s.length(); i++){
+        char cS = s.charAt(i);
+        char cT = t.charAt(i);
+
+        if(mapST.containKey(cS)){
+            if(mapST.get(cS) != cT) return false;
+        } else {
+            mapST.put(cS, cT);
+        }
+
+        if(mapTS.containKey(cT)){
+            if(mapST.get(cT) != cS) return false;
+        } else {
+            mapTS.put(cT, cS);
+        }
+    }
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2043-2046
+public static boolean isReflected(int[][] points){
+    if (points.length == 0) return true;
+    int minX = Integer.MAX_VALUE;
+    int maxX = Integer.MIN_VALUE;
+    Map<String, Integer> map = new HashMap();
+
+    for( int[] p : poins){
+        int x = p[0];
+        int y = p[1];
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+        String key = x + " " + y;
+        map.put(key, map.getOrDefault(key, 0) + 1);
+    }
+
+    int l = minX + maxX;
+
+    for(int[]p : points){
+        int x = p[0];
+        int y = p[1];
+        int reflectedX = l - x;
+        String reflectedKey = reflectedX + " " + y;
+        String originalKey  = x + " " + y;
+        if(!map.containsKey(reflectedKey)) return false;
+        if(!map.get(reflectedKey).equals(
+                        map.get(originalKey))) return false;
+    }
+    return true;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2100
+public class LRUCache{
+    private final int capacity;
+    private final LinkedHashMap<Integer, Integer> cache;
+
+    public LRUCache(int capacity){
+        this.capacity = capacity;
+        this.cache = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true){
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest){
+                return size() > LRUCache.this.capacity;
+            }
+        };
+    }
+    public int get(int key){
+        return cache.getOrDefault(key, -1);
+    }
+    public void put (int key, int value){
+        cache.put(key, value);
+    }
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2114 - 2130
+public int[] findThePrefixCommonArray(int[] A, int[] B) {
+    Set<Integer> seen = new HasSet<>();
+    int[] result = new int[A.length];
+    int common = 0;
+
+    for (int i = 0; i < A.lrength; i++){
+        if(seen.contains(A[i])) common++;
+        else seen.add(A[i]);
+
+        if(seen.contains(B[i])) common++;
+        else seen.add(B[i]);
+
+        result[i] = common;
+    }
+    return result;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 2200
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
