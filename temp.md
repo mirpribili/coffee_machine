@@ -383,23 +383,23 @@ public static boolean isReflected(int[][] points){
     return true;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2100
-public class LRUCache{
+public class LRUcache {
     private final int capacity;
     private final LinkedHashMap<Integer, Integer> cache;
 
-    public LRUCache(int capacity){
+    public LRUcache(int capacity) {
         this.capacity = capacity;
-        this.cache = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true){
+        this.cache = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true) {
             @Override
-            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest){
-                return size() > LRUCache.this.capacity;
+            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+                return size() > LRUcache.this.capacity;
             }
         };
     }
-    public int get(int key){
+    public int get(int key) {
         return cache.getOrDefault(key, -1);
     }
-    public void put (int key, int value){
+    public void put(int key, int value) {
         cache.put(key, value);
     }
 }
