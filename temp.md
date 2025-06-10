@@ -420,7 +420,32 @@ public int[] findThePrefixCommonArray(int[] A, int[] B) {
     }
     return result;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 2200
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static List<List<Integer>> sum3(int[] ar) {
+    Arrays.sort(ar);
+    List<List<Integer>> res = new ArrayList<>(); // Исправлено
+    for (int i = 0; i < ar.length - 2; i++) {
+        if (i > 0 && ar[i] == ar[i - 1]) continue;
+        int left = i + 1;
+        int right = ar.length - 1;
+        while (left < right) {
+            int sum = ar[i] + ar[left] + ar[right];
+            if (sum < 0) {
+                left++;
+            } else if (sum > 0) {
+                right--;
+            } else {
+                res.add(Arrays.asList(ar[i], ar[left], ar[right])); // Исправлено
+                // Пропуск дубликатов для left и right
+                while (left < right && ar[left] == ar[left + 1]) left++;
+                while (left < right && ar[right] == ar[right - 1]) right--;
+                left++;
+                right--;
+            }
+        }
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
