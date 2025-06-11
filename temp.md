@@ -447,7 +447,35 @@ public static List<List<Integer>> sum3(int[] ar) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+public static List<List<Integer>> sum4(int[] num, int t){
+    List<List<Integer>> res = new ArrayList<>();
+    if(num == null || num.length < 4) return res; #####
+    Arrays.sort(num); #####
+    int len = num.length;
+    for(int i = 0; i < len - 3; i++){
+        if(i>0 && num[i] == num[i-1]) continue;
+        for(int j = i + 1; j  < len - 2; j++){
+            if(j>i + 1 && num[j] == num[j-1]) continue;
+            int l = j + 1;
+            int r = len - 1;
+            while(l < r){
+                long sum = (long) num[i] + num[j] +  num[l] + num[r];
+                if (sum == t){
+                    res.add(Arrays.asList(num[i], num[j],  num[l], num[r]));
+                    while(l < r && num[l] == num[l + 1]) l++;
+                    while(l < r && num[r] == num[r - 1]) r--;
+                    l++;
+                    r--;
+                } else if (sum < t){
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+        }
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
