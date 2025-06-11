@@ -200,8 +200,8 @@ private char toLowerCase(char c) {
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 public int[] intersect(int[] nums1, int[] nums2) {
-    //Arrays.sort(nums1);
-    //Arrays.sort(nums2);
+    Arrays.sort(nums1);
+    Arrays.sort(nums2);
 
     int[] temp = new int[Math.min(nums1.length, nums2.length)];
     int i = 0, j = 0, idx = 0;
@@ -317,7 +317,7 @@ public static boolean isValidSudoku(char[][] board){
     Set<String> seen = new HashSet<>();
     for (int i = 0; i<board.length; i++){
         for (j = 0; j < board[0].length; j++){
-            char val = char[i][j];
+            char val = board[i][j];
             if (val == '.') continue;
             int blockId = (i / 3) * 3 + ( j / 3);
             String rowKey = "r" + i + "-" + val;
@@ -346,11 +346,12 @@ public boolean isIsomorphic(String s, String t){
         }
 
         if(mapTS.containKey(cT)){
-            if(mapST.get(cT) != cS) return false;
+            if(mapTS.get(cT) != cS) return false;
         } else {
             mapTS.put(cT, cS);
         }
     }
+    return true;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2043-2046
 public static boolean isReflected(int[][] points){
@@ -509,7 +510,7 @@ poblic static class Node{
     }
 }
 
-public static Node delFromEnd(Node head, int n){
+public static Node removeNthFromEnd(Node head, int n){
     Node dummy = new Node(0);
     dummy.next = head;
     Node slow = dummy;
