@@ -477,7 +477,24 @@ public static List<List<Integer>> sum4(int[] num, int t){
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+public static int[] intersection(int[] a1, int[] a2){
+    Map<Integer, Integer> map = new HashMap<>();
+    List<Integer> res = new ArrayList<>();
+    for(int a: a1){
+        map.put(a, map.getOrDefault(a, 0) + 1 );
+    }
+    for(int a: a2){
+        if(map.containsKey(a) && map.get(a)>0){
+            res.add(a);
+            map.put(a, map.get(a) - 1);
+        }
+    }
+    int[] inters = new int[res.size()];
+    for (int i = 0; i < res.size(); i++){
+        inters[i] = res.get(i);
+    }
+    return inters;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
