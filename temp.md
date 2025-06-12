@@ -527,6 +527,36 @@ public static Node removeNthFromEnd(Node head, int n){
 }
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+static class Node{
+    int v;
+    Node next;
+    Node(int v){
+        this.v = v;
+        this.next = null;
+    }
+}
+public static Node reverseList(Node head){
+    Node cur = head;
+    Node prev = null;
+    while(cur != null){
+        Node temp = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    return prev;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
