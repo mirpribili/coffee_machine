@@ -547,9 +547,65 @@ public static Node reverseList(Node head){
     return prev;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+static class Node{
+    int v;
+    Node next;
+    Node(int v){
+        this.v = v;
+        this.next = null;
+    }
+}
+public static Node middleOfList(Node head){
+    Node fast = head;
+    Node slow = head;
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    return slow;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static boolean isListPalindrome(Node head){
+    boolean res = true;
+    if(head == null || head.next == null) return true; // #####
 
+    Node fast = head;
+    Node slow = head;
+    Node beforeSlow = null;
+
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        beforeSlow = slow;
+        slow = slow.next;
+    }
+
+    Node reversHalf = reverseList(slow);
+    Node firstHalf = head;
+    Node copy = reversHalf;
+
+    while(reversHalf != null){ // или  firstHalf != null
+        if(reversHalf.val != firstHalf.val){
+            res = false;
+            break;
+        }
+        reversHalf = reversHalf.next;
+        firstHalf  = firstHalf.next;
+    }
+    // #####
+    if(beforeSlow != null) beforeSlow.next = reverseList(copy); // repair
+    return res;
+}
+public static Node reverseList(Node head){
+    Node cur = head;
+    Node prev = null;
+    while(cur != null){
+        Node temp = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    return prev;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
