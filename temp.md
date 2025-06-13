@@ -704,7 +704,23 @@ public static Node finderCycle(Node head){
     return null;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+public static int[] greatNode(Node head){
+    List<Integer> val = new ArrayList<>();
+    while(head != null){
+        val.add(head.val);
+        head = head.next;
+    }
+    int max = val.size();
+    int[] res = new int[max];
+    Deque<Integer> stack = new ArrayDeque<>();
+    for(int i = 0; i < max; i++){
+        while(!stack.isEmpty() && val.get(i) > val.get(stack.peek())){
+            res[stack.pop()] = val.get(i);
+        }
+        stack.push(i);
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
