@@ -632,6 +632,90 @@ public static void reorderList(Node head){
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node mergeLists(Node l1, Node l2){
+    Node head = new Node(0); // #####
+    Node cur = head;
+    while(l1 != null && l2 != null){
+        if(l1.val < l2.val){
+            cur.next = l1;
+            l1 = l1.next;
+        } else {
+            cur.next = l2;
+            l2 = l2.next;
+        }
+        cur = cur.next;
+    }
+    cur.next = (l1 != null) ? l1 : l2;
+    return head.next;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node mergeKLists(Node[] list){
+    if(list == null || list.length == 0) return null;
+    while(list.length > 1){
+        List<Node> temp = new ArrayList<>();
+        for( int i = 0; i<list.length; i +=2){
+            Node l1 = list[i];
+            Node l2 = (i + 1) < list.length ? list[i+1] : null;
+            temp.add(merge(l1, l2));
+        }
+        list = temp.toArray(new Node[0]);
+    }
+    return list[0];
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node intersection(Node a, Node b){
+    Node p1 = a;
+    Node p2 = b;
+    while (p1 != p2){
+        p1 = (p1 == null) ? b : p1.next;
+        p2 = (p2 == null) ? a : p2.next;
+    }
+    return p2;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static boolean hasCycle(Node head){
+    if (head == null) return false;
+    Node fast = head;
+    Node slow = head;
+    while (fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow) return true;
+    }
+    return false;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node finderCycle(Node head){
+    if(head == null) return null;
+    Node fast = head;
+    Node slow = head;
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow){
+            fast = head;
+            while(fast != slow) {
+                fast = fast.next;
+                slow = slow.next;
+            }
+            return fast;
+        }
+    }
+    return null;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
