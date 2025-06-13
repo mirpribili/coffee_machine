@@ -607,7 +607,30 @@ public static Node reverseList(Node head){
     return prev;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static void reorderList(Node head){
+    if(head == null || head.next == null) return;
 
+    Node fast = head;
+    Node slow = head;
+    while(fast.next != null && fast.next.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+
+    Node first/*Half*/ = head;
+    Node second = reverseList(slow.next);
+    slow.next = null;
+
+    while(second != null){
+        Node temp1 = first.next;
+        Node temp2 = second.next;
+
+        first.next = second;
+        second.next = temp1;
+        second = temp2;
+        first = temp1;
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
