@@ -158,11 +158,43 @@ public static List<Integer> iterativeRightSideView(TreeNode root){
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
 
+public static boolean isSymmetric(TreeNode root){
+    if(root == null) return true;
+    return isMirror(root.left, root.right);
+}
+private static boolean isMirror(TreeNode left, TreeNode right){
+    if (left == null && right == null) return true;
+    if (left == null || right == null) return false;
+    return (left.val == right.val)
+        && isMirror(left.left, right.right)
+        && isMirror(left.right, right.left);
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+**Input:** p = [1,2], q = [1,null,2]
+**Output:** false
+public static boolean isSame(TreeNode a, TreeNode b){
+    if(a == null && b == null) return true;
+    if(a == null || b == null) return false;
+    return (a.val == b.val)
+        && isSame(a.left, b.left)
+        && isSame(a.right, b.right);
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+**Input:** root = [1,2,3], targetSum = 5
+**Output:** false
+public static boolean hasPathSum(TreeNode root, int target){
+    if(root == null) return false;
+    if(root.left == null && root.right == null) return target == root.val;
+    return hasPathSum(root.left, target - root.val) || hasPathSum(root.right, target - root.val); 
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
