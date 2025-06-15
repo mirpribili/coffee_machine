@@ -196,7 +196,34 @@ public static boolean hasPathSum(TreeNode root, int target){
     return hasPathSum(root.left, target - root.val) || hasPathSum(root.right, target - root.val); 
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Minimum Depth of Binary Tree
+**Input:** root = [3,9,20,null,null,15,7]
+**Output:** 2
+public static int minDepthIter(TreeNode root){
+    if(root == null) return 0;
+    Queue<TreeNode> que = new LinkedList<>();
+    que.offer(root);
+    int res = 1;
+    while(!que.isEmpty()){
+        int sizeLevel = que.size();
+        for(int i = 0; i<sizeLevel; i++){
+            TreeNode temp = que.poll();
+            if(temp.left == null && temp.right == null) return res;
+            if(temp.left != null) que.offer(temp.left);
+            if(temp.right != null) que.offer(temp.right);
+        }
+        res++;
+    }
+    return res;
+}
+public static int minDepthRec(TreeNode root){
+    if(root == null) return 0;
+    if(root.left == null) return minDepthRec(root.right) + 1;
+    if(root.right == null) return minDepthRec(root.left) + 1;
+    int l = minDepthRec(root.left);
+    int r = minDepthRec(root.right);
+    return Math.min(l, r) +1;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
