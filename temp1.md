@@ -288,7 +288,20 @@ public class PrefixSumRangeQuery {
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+[2, 3, 4, 6, 8, -5] == -1
+ [1,0,1] == 1
+public static int findPivotIndex(int[] nums) {
+    int max = 0;
+    for(int n : nums){
+        max += n;
+    }
+    int left = 0;
+    for(int i=0; i<nums.length; i++){
+        if(left == max - left - num[i]) return i;
+        left += num[i];
+    }
+    return -1;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
