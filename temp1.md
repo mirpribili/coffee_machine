@@ -225,13 +225,68 @@ public static int minDepthRec(TreeNode root){
     return Math.min(l, r) +1;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Path Sum III
+**Input:** 10->5->3->0->0->0 targ = 8
+**Output:** 4
+public static pathSum(TreeNode root, int target){
+    HashMap<Integer, Integer> map = new HashMap<>();
+    map.put(0,1); // if val == tar
+    return dfs(root, target, map, 0);
+}
+private static int dfs(TreeNode root, int target, HashMap<Integer, Integer> map, int sum){
+    if(root == null) return 0;
+    sum += root.val;
+    int res = map.getOrDefault(sum - target, 0);
+    map.put(sum, map.getOrDefault(sum, 0) +1 );
+    res += dfs(root.left, target, map, sum);
+    res += dfs(root.right, target, map, sum);
+    map.put(sum, map.getOrDefault(sum, 0) -1 );
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Binary Tree Level Order Traversal II
+Input: root = [3,9,20,null,null,15,7]
+Output: [[15,7],[9,20],[3]]
 
+public static List<List<Integer> levelOrderTrav(TreeNode root){
+    List<List<Integer> list = new ArrayList<>();
+    dfs(root, list, 0);
+    Collections.reverse(list);
+    return list;
+}
+private string void dfs(TreeNode root, List<List<Integer> list, int level){
+    if(root == null) return;
+    if (list.size() == level) list.add(new ArrayList<>());
+    list.get(level).add(root.val);
+    dfs(root.left, list, level +1);
+    dfs(root.right, list, level +1);
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+массивы
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+**Input**
+["NumArray", "sumRange", "sumRange", "sumRange"]
+{ { {      -2, 0, 3, -5, 2, -1}}, [0, 2], [2, 5], [0, 5] }
+>      0.  1.  2.  3. 4.  5.
+**Output**
+[null, 1, -1, -3] 1й нал это глюк вызова конструктора в литкоде
 
+public class PrefixSumRangeQuery {
+    int[] sumP;
+    PrefixSumRangeQuery(int[] ar){
+        this.sumP = new int[ar.length +1];
+        for (int i = 0; i< ar.length; i++ ){
+            sumP[i+1] = sumP[i] + ar[i];
+        }
+    }
+    public int getSum(int left, int right){
+        return sumP[right + 1 ] - sumP[left];
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
