@@ -376,7 +376,23 @@ public int missingNumber(int[] nums) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input:[3 1 2 5 3] 
+Output:[3, 4] 
 
+public static int[] findRepeatAndMissing(int[] nums) {
+    int rep = -1;
+    int mis = -1;
+    int ix = 0;
+    for(int i = 0; i<nums.length; i++){
+        ix = num[i] - 1; // по усл от 1 до n
+        if(num[ix] > 0) num[ix] = num[ix] * -1;
+        else rep = num[ix] * -1; 
+    }
+    for(int i = 0; i<nums.length; i++){
+        if(nums[i] > 0) mis = i - 1; // index i > 0 только если егр нет в ix
+    }
+    return new int[]{rep, mix};
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
