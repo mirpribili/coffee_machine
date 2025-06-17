@@ -303,13 +303,78 @@ public static int findPivotIndex(int[] nums) {
     return -1;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Subarray Sum Equals K
+> {3, 2, 1}. k = 3.   res = 2	Подмассивы: {3}, {2, 1}
 
+public static int countSubarrays(int[] nums, int k) {
+    int res = 0;
+    int sum = 0;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    map.put(0, 1);
+    for(int n : nums){
+        sum += n;
+        res += map.getOrDefault(sum - k, 0);
+        map.put(sum, map.getOrDefault(sum, 0));
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+1  2  3
+4  5  6
+7  8  9
+==
+0  0   0   0
+0  1   3   6
+0  5  12  21
+0 12  27  45
+==
+45 = 27 + 21 + 9 - 12
+sum = 45 - 12 - 6 + 1 = 28
+==
+public class Immutable2DRangeSum {
+    int[][] psum;
+    Immutable2DRangeSum(int[][] matx){
+        int r = matx.length;
+        int c = matx[0].length;
+        this.psum = new int[r+1][c+1];
+        for(int i = 1; i<=r; i++){
+            for(int j = 1; j<=c; j++){
+                psum[i][j] = matx[i-1][j-1] + psum[i-1][j] + psum[i][j-1] - psum[i-1][j-1];
+            }
+        }
+    }
+    public int sumRegion(int x1, int y1, int x2, int y2){
+        return psum[x2+1][y2+1] + psum[x1][y1] - psum[x2+1][y1] - psum[x1][y2+1];
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+public int missingNumber(int[] nums) {
+    int max = nums.length;
+    int res = 0;
+    for (int i = 0; i<max; i++){
+        res ^=nums[i];
+    }
+    for(int i =0; i<=max; i++){
+        res ^=i;
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+3 в двоичном виде: 011  
+2 в двоичном виде: 010
+011 XOR 010 = 001 (в двоичной) = 1 (в десятичной)
 
+public int missingNumber(int[] nums) {
+    int max = nums.length;
+    int res = 0;
+    for (int i = 0; i<max; i++){
+        res ^=nums[i];
+    }
+    for(int i =0; i<=max; i++){
+        res ^=i;
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
