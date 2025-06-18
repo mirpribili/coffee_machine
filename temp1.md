@@ -394,13 +394,77 @@ public static int[] findRepeatAndMissing(int[] nums) {
     return new int[]{rep, mix};
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Исходный массив: 1, 2, 3, 4, 5, 6, 7  
+k = 3  
+Результат: 5, 6, 7, 1, 2, 3, 4
 
+public static void rotate(int[] nums, int k) {
+    int l = nums.length;
+    k = k % l; // if k>l 11%5=1
+    reverse(nums, 0, l-1);
+    reverse(nums, 0, k-1); //####
+    reverse(nums, k, l-1);
+}
+private static void reverse(int[] ar, int left, int right){
+    while(left<right){
+        int temp = ar[right];
+        ar[right] = ar[left];
+        ar[left] = temp;
+        left++;
+        right--;
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+0 0 0 0 0 1 == true
+0 0 0 1 2 0 == false
+public static boolean isMonotonic(int[] nums) { 
+    boolean inc = true;
+    boolean dec = true;
 
+    for(int i = 1; i<nums.length; i++){
+        if(num[i] > num[i-1]) inc = false;
+        if(num[i] < num[i-1]) dec = false;
+        if(!inc && !dec) return false;
+    }
+    return true;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+public int findLengthOfLCIS(int[] nums) {
+    if (nums == null) return 0;
+    int l = nums.length;
+    if(l == 0) return 0;
+    int max = 0;
+    int cur = 1;
+    for(int i = 1; i<l; i++){
+        if(nums[i]>nums[i-1]) cur++;
+        else cur = 1;
+        max=Math.max(cur, max);
+    }
+    return max;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+aaabbv == a3b2v
+public int compress(char[] chars) { 
+    int write = 0;
+    int read = 0;
+    while(read < chars.length){
+        int res = 0; // ####
+        char cur = chars[read];
+        while(read < chars.length && chars[read] == cur){
+            res++;
+            read++;
+        }
+        chars[write++] = cur;
+        if(res>1){
+            String resAr = Integer.toString(res);
+            for(char c : resAr.toCharArray()){
+                chars[write] = c;
+                write++;
+            }
+        }
+    }
+    return write;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
