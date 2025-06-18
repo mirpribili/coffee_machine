@@ -466,7 +466,18 @@ public int compress(char[] chars) {
     return write;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+1, 1, 2, 3, 5, 8, 13, 21
+public static int fibonacci(int n) { 
+    if(n==0 || n==1) return 1;
+    int cur = 1;
+    int prev = 1;
+    for(int i = 2; i<=n; i++){
+        int temp = cur + prev;
+        prev = cur;
+        cur = temp;
+    }
+    return cur;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
