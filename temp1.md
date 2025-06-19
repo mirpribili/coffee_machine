@@ -479,6 +479,139 @@ public static int fibonacci(int n) {
     return cur;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Contains Duplicate
+public static boolean hasDublicate(int[] ar){
+    if(ar == null || ar.length < 2) return false;
+    HashSet<Integer> set = new HashSet<>();
+    for(int a : ar){
+        if(set.contains(a)) return true;
+        set.add(a);
+    }
+    return false;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Consecutive Characters
+`"aaabbcc"` ответ будет 3
+public static int maxPower(String s) {  
+    if(s == null || s.isEmpty()) return 0;
+    int max = 0;
+    int l = 1; // #####
+    for(int i = 1; i<s.length(); i++){
+        if(s.charAt(i) == s.charAt(i-1)) l++;
+        else l = 1;
+        max = Math.max(max, l);
+    }
+    return max;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Maximum Product of Two Elements in an Array
+5, 4, 3 == (5-1)*(4-1)
+public static int maxProduct(int[] nums) {  
+    int max1 = Integer.MIN_VALUE;  
+    int max2 = Integer.MIN_VALUE;
+    for(int n : nums){
+        if(n > max1){
+            max2 = max1;
+            max1 = n;
+        }
+        if(n > max1) max1 = n;
+    }
+
+    return (max1-1)*(max2-1);
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Find the Highest Altitude
+Если изменения высоты:[-5, 1, 5, 0, -7], то высоты по шагам будут:  
+0 (начальная), 0-5 = -5, -5+1 = -4, -4+5 = 1, 1+0 = 1, 1-7 = -6.  
+
+public static int findHighestAltitude(int[] gain) {
+    int res = 0;
+    int max = 0;
+    for(int g : gain){
+        res += g;
+        if(res > max) max = res;
+    }
+    return max;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Matrix Block Sum
+public int[][] matrixBlockSum(int[][] mat, int k) {
+    int r = mat.length;
+    int c = mat[0].length;
+
+    int[][] psum = new int[r+1][c+1];
+    for(int i = 1; i <=r; i++){
+        for(int j = 1; j <=c; j++){
+            psum[i][j] = mat[i-1][j-1] + psum[i][j-1] + psum[i-1][j] - psum[i-1][j-1];
+        }   
+    }
+    int[][] res = new int[r][c];
+    for(int i = 0; i <r; i++){
+        for(int j = 0; j <c; j++){
+            int r1 = Math.max(i, i -k);
+            int c1 = Math.max(j, j -k);
+            int r2 = Math.min(r - 1, i +k);
+            int c2 = Math.min(c - 1, j +k);
+
+            res[i][j] = psum[r2 +1][c2 +1] + psum[r1][c1] 
+                - psum[r1][c2+1] - psum[r2+1][c1];
+        }   
+    }
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Number of Submatrices That Sum to Target
+[1, 1]
+[1, 1]
+t=1 res =4
+
+public static int numSubmatrixSumTarget(int[][] ar, int target) {
+    if(ar == null) return 0;
+    int row = ar.length;
+    int col = ar[0].length;
+    int res = 0;
+
+    for(int i = 0; i<row; i++){
+        int[] resAr = new int[col];
+        for(int j=i; j<row; j++){
+            for(int k = 0; k<col; k++){
+                resAr[k] += ar[j][k];
+            }//только 1 строку сформирует
+            res += sumSubArr(resAr, target); // ####
+        }
+    }
+    return res;
+}
+private static int sumSubArr(int[] ar, int t){
+    if(ar == null) return 0;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    int sum = 0;
+    int res = 0;
+    map.put(0, 1);
+    for(int i=0; i<ar.length; i++){
+        sum += ar[i];
+        res += map.getOrDefault(sum-t, 0);
+        map.put(sum,map.getOrDefault(sum, 0)+1);
+    }
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
