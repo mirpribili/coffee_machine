@@ -596,11 +596,103 @@ private static int sumSubArr(int[] ar, int t){
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+интервалы
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{1,3},{2,6},{8,10},{15,18}};  
+int[][] expected1 = {{1,6},{8,10},{15,18}};
 
+private static boolean isOverLapping(int[] a, int[] b){
+    return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
+}
+private static int[] mergeTwoIntervals(int[] a, int[] b){
+    return new int[]{a[0], Math.max(a[1], b[1])};
+}
+
+public static int[][] merge(int[][] intervals) {
+    if(intervals.length == 0) retutn new int[0][];
+    List<int[]> res = new ArrayList<>();
+    
+    Arrays.sort(intervals, Comarator.compareInt(a->a[0]));
+
+    res.add(intervals[0]);
+    for(int i = 1; i<intervals.length; i++){
+        int[] cur = intervals[i];
+        int[] last = res.get(res.size() - 1);
+        if(isOverLapping(cur, last)){
+            res.set(res.size()-1, mergeTwoIntervals(last, cur));
+        } else {
+            res.add(cur);
+        }
+    }
+    return res.toArray(new int[res.size()][]);
+}
+
+TreeMap<Integer, List<int[]> map = new TreeMap<>();
+// ключ нач интервала а значение список интерв с так началом
+for(int[] inter : intervals){
+    map.computeIfAbsent(interval[0], k->new ArrayList<>()).add(inter);
+}
+List<int[]> sortedIntervals = new ArrayList<>();
+for(List<int[]> list: map.getValues()){
+    sortedIntervals.addAll(list);
+}
+List<int[]> result = new ArrayList<>();  
+result.add(sortedIntervals.get(0)); 
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{0, 30}, {5, 10}, {15, 20}};
+int expected1 = 2;
+
+
+public static int minMeetingRoomsTwoPointer(int[][] intervals) {
+    if (intervals == null || intervals.length == 0 ) return 0;
+    int l = intervals.length;
+
+    int[] start = new int[l];
+    int[] end = new int[l];
+
+    for(int i = 0; i< l; i++){
+        start[i] = intervals[i][0];
+        end[i] = intervals[i][1];
+    }
+    Arrays.sort(start);
+    Arrays.sort(end);
+
+    int endMeet = 0;
+    int room = 0;
+    for(int i=0; i<l; i++){
+        if(start[i] < end[endMeet]){
+            room++;
+        } else {
+            endMeet++;
+        }
+    }
+    return room;
+}
+
+321435 == PriorityQueue
+     1
+    / \
+   3   2
+  / \   \
+ 4   3   5
+
+public static int minMeetingRoomsTwoPointer(int[][] intervals) {
+    if (intervals == null || intervals.length == 0) return 0;
+    PriorityQueue<Integer> queueEnds = new PriorityQueue<>();
+    Arrays.sort(intervals, Comparator.comparingInt(a->a[0]));
+    queueEnds.add(intervals[0][1]);
+    for(int i =1; i<intervals.length; i++){
+        if(intervals[i][0] >= queueEnds.peek()){
+            queueEnds.pool();
+        }
+        queueEnds.add(intervals[i][1]);
+    }
+    return queueEnds.size();
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
