@@ -694,7 +694,29 @@ public static int minMeetingRoomsTwoPointer(int[][] intervals) {
     return queueEnds.size();
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Car Pooling 
+int[][] trips2 = {{2, 1, 5}, {3, 5, 7}}; 2-pas 1-start 5-end
+> int capacity2 = 5; res=true
+> int capacity1 = 4; res=false
+public boolean canCarPool(int[][] trips, int capacity) {
+        if(trips == null) return false;
+        int[] passengerChanges = new int[1001];
+        for(int[][] t: trips){
+            int pass = t[0];
+            int start = t[1];
+            int end = t[2];
+            passengerChanges[start] += pass;
+            passengerChanges[end] -= pass;
+        }
+        int curPass = 0;
+        for(int[] change : passengerChanges){
+            curPass += change; // #####
+            if (curPass > capacity) return false;
+        }
+        return true;
+}
+Время: O(N + M), где N — число поездок, M — максимальная точка маршрута (1000)
+Память: O(M) (фиксированный массив на 1001 элемент)
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
