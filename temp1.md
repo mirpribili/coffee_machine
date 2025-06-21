@@ -718,13 +718,128 @@ public boolean canCarPool(int[][] trips, int capacity) {
 Время: O(N + M), где N — число поездок, M — максимальная точка маршрута (1000)
 Память: O(M) (фиксированный массив на 1001 элемент)
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{10, 16}, {2, 8}, {1, 6}, {7, 12}};  
+int expected1 = 2;
 
+Minimum Number of Arrows to Burst Balloons
+public int findMinArrowShots(int[][] balloons) {
+    if(balloons==null || balloons.length == 0)) return 0; //#####
+    Arrays.sort(balloons, Comparator.comparingInt(a->a[1]));
+    int end = balloons[0][1];
+    int arrow = 1;
+    for (int i = 1; i<balloons.length; i++){
+        if(balloons[i][0] > end){
+            arrow++;
+            end = balloons[i][1];
+        }
+    }
+    return arrow;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] segments1 = {{0, 5}, {-3, 2}, {7, 10}}; 
+int[] points1 = {1, 6};
+int[] expected1 = {2, 0};
 
+public static int[] countSegments(int[][] segments, int[] points) {
+    if(segments == null || segments.length == 0) return new int[0];
+    int l = segments.length;
+
+    int[] start = new int[l];
+    int[] end = new int[l];
+    int[] res = new int[points.length];
+    for(int i = 0; i<l; i++){
+        start[i] = Math.min(segments[i][0], segments[i][1]);
+        end[i]   = Math.max(segments[i][0], segments[i][1]);
+    }
+    Arrays.sort(start);// #######
+    Arrays.sort(end);// #######
+
+    for(int i = 0; i<points.length; i++){
+        int countS = lowerGreedyBand(start, points[i]);
+        int counte = apperBand(end, points[i]);
+        res[i] = countS - counte;
+    }
+    return res;
+}
+private int lowerGreedyBand(int[] ar, int key){
+    int left = 0;
+    int right = ar.length;
+    while(left<right){
+        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
+        if(key >= ar[mid]) left = mid +1;
+        else right = mid;
+    }
+    return left;
+}
+
+private int apperBand(int[] ar, int key){
+    int left = 0;
+    int right = ar.length;
+    while(left<right){
+        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
+        if(key > ar[mid]) left = mid +1;
+        else right = mid;
+    }
+    return left;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Add Two Numbers
+2->4->3 // число 342
+5->6->4 // число 465
+7->0->8 // res
 
+static class Node {  
+    int val;  
+    Node next;  
+    Node(int x) { val = x; }  
+}  
+  
+public Node addTwoNumbers(Node l1, Node l2) {
+    Node dummy = new Node(-100);
+    Node p1 = l1;
+    Node p2 = l2;
+    Node cur = dummy;
+    int carry = 0;
+
+    while(p1 != null || p2 != null){ //######
+        int x = (p1 != null) ? p1.val : 0;
+        int y = (p2 != null) ? p2.val : 0;
+        int sum = x + y + carry;
+        cur.next = new Node(sum%10); /// #####
+        cur = cur.next;
+        carry = sum / 10; // ####
+        if(p1 != null) p1 = p1.next;
+        if(p2 != null) p2 = p2.next;
+    }
+    if(carry > 0) cur.next = new Node(carry);
+    return dummy.next;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static int[] addNumbers(int[] arr1, int[] arr2) { 
+    int l1 = arr1.length;
+    int l2 = arr2.length;
+    int k = Math.max(l1, l2);
+    int[] res = new int[k+1]; // + 1 тк доп разряд
 
+    l1--; // ####
+    l2--; // ####
+
+    int carry = 0;
+    while(l1>=0 || l2 >=0){
+        int x = (l1>=0) ? arr1[l1] : 0;
+        int y = (l2>=0) ? arr2[l2] : 0;
+        int sum = x + y + carry;
+        carry = sum / 10;
+        res[k] = sum % 10;
+        l1--;
+        l2--;
+        k--;
+    }
+    if(carry == 0 ) return Arrays.copyOfRange(res, 1, res.length);
+    else res[k] = carry;
+
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
