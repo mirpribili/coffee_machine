@@ -153,11 +153,75 @@ public boolean searchMatrix(int[][] matrix, int target) {
     return false;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Sqrt(x)
+x = 4 ->2 (2² = 4 ≤ 4)
+x = 8 ->2 (2² = 4 ≤ 8, 3² = 9 > 8)
 
+public int mySqrt(int x) {
+    if(x == 0 || x == 1) return x;
+    long left = 0;
+    long right = x / 2;
+    while(left <= right){
+        long mid = (right - left)/2 + left;
+        long sqr = mid * mid;
+        if(sqr == x) retirn mid;
+
+        if(sqr > x) right = mid - 1;
+        else left = mid + 1;
+    }
+    return (int) right; ///####### l = 1e привышающее а r послед не превыш квадр х
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Find First and Last Position of Element in Sorted Array
+test(new int[]{5, 7, 7,  8, 8, 10}, >>>8<<<, res{3, 4}); size 6
 
+public static int[] findFirstAndLastPosition(int[] nums, int target) {
+    int first = findFirstOrLastPosition(nums, target, true);
+    if(first == -1) return new int[]{-1, -1};
+    int second = findFirstOrLastPosition(nums, target, false);
+    return new int[]{first, second};
+}
+private static findFirstOrLastPosition(int[] ar, int t, boolean leftElseRight){
+    int left = 0;
+    int right = ar.length -1;
+    int res = -1;
+    while(left <= right){
+        int mid = left + (right-left) >>> 1;
+        if(ar[mid] == t){
+            res = mid;
+            if(leftElseRight){
+                right = mid -1;
+            } else {
+                left = mid + 1;
+            }
+        } else if(ar[mid] < t){ // else if ######
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Find K Closest Elements
+{1, 3, 5, 7, 9}
+k = 3
+x = 6
+res (3, 5, 7)
+public static List<Integer> findKClosestElements(int[] arr, int k, int x) {
+    int left = 0;
+    int right = arr.length - k;
+    while(left < right){ //#######
+        int mid = left + (- left + right) /2;
+        if (x - arr[mid] > arr[mid + k] - x ) left = mid + 1;
+        else right = mid; //######
+    }
+    List<Integer> res = new ArrayList<>();
+    for (int i = left; i<left+k; i++){
+        res.add(arr[i]);
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
