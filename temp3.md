@@ -79,6 +79,10 @@ public int videoStitchingMaxReach(int[][] clips, int time) {
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Двоичный поиск
+
+Цикл завершается, когда интервал сжат до одного элемента (left == right). Нет смысла выполнять лишнюю итерацию, чтобы проверить один и тот же индекс.
+
+Нужно проверить все возможные кандидаты, включая ситуацию, когда left == right — последний элемент интервала.
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
@@ -223,11 +227,66 @@ public static List<Integer> findKClosestElements(int[] arr, int k, int x) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Valid Perfect Square
+num = 16 → true (4 * 4 = 16), num = 14 → false
+public boolean isPerfectSquare(int num) {
+    if(num < 0) return false;
+    int left = 0;
+    int right = num;
+    while(left <= right){
+        long mid = left + (right - left) >>> 1;
+        long sqr = mid * mid;
+        if(sqr == num) return true;
+        if(sqr > num) right = mid - 1;
+        elsr left = mid + 1;
+    }
+    return false;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Find Minimum in Rotated Sorted Array
+Массив: {4,5,6,7,0,1,2} 
+res = 4
 
+public static int findMin(int[] nums) {
+    int left = 0; right = nums.length - 1;
+    while(left < right){
+        int mid = left + (right - left)/2;
+        if(nums[mid] > nums[right]) left = num + 1;
+        else right = mid;
+    }
+    return nums[left];
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Search in Rotated Sorted Array II
+public static boolean search(int[] nums, int target) {
+    int left = 0;
+    int right = nums.length - 1;
+    while(left <= right){
+        int mid = left + (right - left) /2;
+        if(nums[mid] == target) return true;
 
+        // если не понять какая половина где
+        if(nums[left] == nums[mid] && nums[mid] == nums[right]){
+            left++;
+            right--;
+        } else
+
+         if(nums[left] <= nums[mid]){
+            if(nums[left] < target && target <= nums[mid]){
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        } else if(nums[mid] <= nums[right]){
+            if(nums[mid] < target && target <= nums[right]){
+                left = mid + 1;
+            } else{
+                right = mid;
+            }
+        }
+    }
+    return false;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
