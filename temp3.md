@@ -288,6 +288,100 @@ public static boolean search(int[] nums, int target) {
     return false;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+stack
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Valid Parentheses
+"()[]{}{}",// true
+"(]",      // false
+public boolean isValid(String s) {
+    Deque<Character> stack = new ArrayDeque<>();
+    for(char c : s.toCharArray()){
+        if(c == '(') stack.push(')');
+        else if(c == '[') stack.push(']');
+        else if(c == '{') stack.push('}');
+        else if(stack.isEmpty() || stack.pop() != c) return false;
+    }
+    return stack.isEmpty();
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Balanced Parantheses!
+ "(()(()()))" — сбалансирована
+- ")(“ — не сбалансирована
+public static boolean isBalanced(String s) {
+    Stack<Character> stack = new Stack<>();
+    for(char c : s.toCharArray()){
+        if (c == '(' || c == '[' || c == '{') stack.push(c);
+        else if (stack.isEmpty() || !isMirrorBrackets(stack.pop(), c)) return false;
+    }
+    return stack.isEmpty(); // ##########
+}
+private static boolean isMirrorBrackets(char a, char b){
+    if( (a == '(' && b == ')') ||
+        (a == '[' && b == ']') ||
+        (a == '{' && b == '}') ) return true;
+    rerurn false;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+1249. Minimum Remove to Make Valid Parentheses
+"lee(t(c)o)de)",
+"lee(t(c)o)de",
+public static String minRemoveToMakeValid(String s) {
+    StringBuilder sb = new StringBuilder(s);
+    Stack<Integer> stack = new Stack<>();
+    for(int i = 0; i<sb.length(); i++){
+        char c = sb.charAt(i);
+        if(c == '(') stack.push(i);
+        else if(c == ')'){
+            if( !stack.isEmpty() ) stack.pop();
+            else sb.setCharAt(i, '*');
+        }
+    }
+    while(!stack.isEmpty()) sb.setCharAt(staсk.pop(), '*');
+
+    StringBuilder res = new StringBuilder();
+    for(int i = 0; i<sb.length(); i++){
+        char c = sb.charAt(i);
+        if(c != '*')res.append(c);
+    }
+    return res.toString();
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+739. Daily Temperatures
+temperatures = {73, 74, 75, 71, 69, 72, 76, 73}  
+Результат: {1, 1, 4, 2, 1, 1, 0, 0}
+public int[] dailyTemperatures(int[] temperatures) {
+    int[] res = new int[temperatures.length];
+    Stack<Integer> stack = new Stack<>();
+    for(int i = 0; i<temperatures.length; i++){
+        while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
+            int prev = stack.pop();
+            res[prev] = i - prev;
+        }
+        stack.push(i);
+    }
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
