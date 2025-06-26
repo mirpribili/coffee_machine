@@ -1,6 +1,231 @@
 ```
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+linked list
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+poblic static class Node{
+    int var;
+    Node next;
+    Node(int v){
+        this.var = v;
+        this.next = null;
+    }
+}
+
+public static Node removeNthFromEnd(Node head, int n){
+    Node dummy = new Node(0);
+    dummy.next = head;
+    Node slow = dummy;
+    Node fast = dummy;
+    for (int i = 0; i < n; i++){
+        fast = fast.next;
+    }
+    while(fast.next != null){
+        fast = fast.next;
+        slow = slow.next;
+    }
+    slow.next = slow.next.next;
+    return dummy.next;
+}
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+static class Node{
+    int v;
+    Node next;
+    Node(int v){
+        this.v = v;
+        this.next = null;
+    }
+}
+public static Node reverseList(Node head){
+    Node cur = head;
+    Node prev = null;
+    while(cur != null){
+        Node temp = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    return prev;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+static class Node{
+    int v;
+    Node next;
+    Node(int v){
+        this.v = v;
+        this.next = null;
+    }
+}
+public static Node middleOfList(Node head){
+    Node fast = head;
+    Node slow = head;
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    return slow;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static boolean isListPalindrome(Node head){
+    boolean res = true;
+    if(head == null || head.next == null) return true; // #####
+
+    Node fast = head;
+    Node slow = head;
+    Node beforeSlow = null;
+
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        beforeSlow = slow;
+        slow = slow.next;
+    }
+
+    Node reversHalf = reverseList(slow);
+    Node firstHalf = head;
+    Node copy = reversHalf;
+
+    while(reversHalf != null){ // или  firstHalf != null
+        if(reversHalf.val != firstHalf.val){
+            res = false;
+            break;
+        }
+        reversHalf = reversHalf.next;
+        firstHalf  = firstHalf.next;
+    }
+    // #####
+    if(beforeSlow != null) beforeSlow.next = reverseList(copy); // repair
+    return res;
+}
+public static Node reverseList(Node head){
+    Node cur = head;
+    Node prev = null;
+    while(cur != null){
+        Node temp = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    return prev;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static void reorderList(Node head){
+    if(head == null || head.next == null) return;
+
+    Node fast = head;
+    Node slow = head;
+    while(fast.next != null && fast.next.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+
+    Node first/*Half*/ = head;
+    Node second = reverseList(slow.next);
+    slow.next = null;
+
+    while(second != null){
+        Node temp1 = first.next;
+        Node temp2 = second.next;
+
+        first.next = second;
+        second.next = temp1;
+        second = temp2;
+        first = temp1;
+    }
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node mergeLists(Node l1, Node l2){
+    Node head = new Node(0); // #####
+    Node cur = head;
+    while(l1 != null && l2 != null){
+        if(l1.val < l2.val){
+            cur.next = l1;
+            l1 = l1.next;
+        } else {
+            cur.next = l2;
+            l2 = l2.next;
+        }
+        cur = cur.next;
+    }
+    cur.next = (l1 != null) ? l1 : l2;
+    return head.next;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node mergeKLists(Node[] list){
+    if(list == null || list.length == 0) return null;
+    while(list.length > 1){
+        List<Node> temp = new ArrayList<>();
+        for( int i = 0; i<list.length; i +=2){
+            Node l1 = list[i];
+            Node l2 = (i + 1) < list.length ? list[i+1] : null;
+            temp.add(merge(l1, l2));
+        }
+        list = temp.toArray(new Node[0]);
+    }
+    return list[0];
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node intersection(Node a, Node b){
+    Node p1 = a;
+    Node p2 = b;
+    while (p1 != p2){
+        p1 = (p1 == null) ? b : p1.next;
+        p2 = (p2 == null) ? a : p2.next;
+    }
+    return p2;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static boolean hasCycle(Node head){
+    if (head == null) return false;
+    Node fast = head;
+    Node slow = head;
+    while (fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow) return true;
+    }
+    return false;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static Node finderCycle(Node head){
+    if(head == null) return null;
+    Node fast = head;
+    Node slow = head;
+    while(fast != null && fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow){
+            fast = head;
+            while(fast != slow) {
+                fast = fast.next;
+                slow = slow.next;
+            }
+            return fast;
+        }
+    }
+    return null;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static int[] greatNode(Node head){
+    List<Integer> val = new ArrayList<>();
+    while(head != null){
+        val.add(head.val);
+        head = head.next;
+    }
+    int max = val.size();
+    int[] res = new int[max];
+    Deque<Integer> stack = new ArrayDeque<>();
+    for(int i = 0; i < max; i++){
+        while(!stack.isEmpty() && val.get(i) > val.get(stack.peek())){
+            res[stack.pop()] = val.get(i);
+        }
+        stack.push(i);
+    }
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 интервалы 2
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
@@ -366,63 +591,4 @@ public int[] dailyTemperatures(int[] temperatures) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 ```
