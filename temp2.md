@@ -591,4 +591,48 @@ public int[] dailyTemperatures(int[] temperatures) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static void quickSort(int[] array, int low, int high) {  
+    if (array == null || low >= high || array.length == 0) {  
+        return;  
+    }  
+    int middle = low + (high - low) / 2;  
+    int pivot = array[middle];  
+    int i = low;  
+    int j = high;  
+    while (i <= j) {  
+        while (array[i] < pivot) {i++;}  
+        while (array[j] > pivot) {j--;}  
+        if (i <= j) {  
+            int temp = array[i];  
+            array[i] = array[j];  
+            array[j] = temp;  
+            i++;  
+            j--;  
+        }  
+    }  
+    if (low < j) {  
+        quickSort(array, low, j);  
+    }  
+    if (i < high) {  
+        quickSort(array, i, high);  
+    }  
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static void bubbleSort(int[] arr) {
+    int n = arr.length - 1;
+    for (int i = 0; i < n; i++){
+        boolean swap = false;
+        for(int j = 0; j < n - i; j++){
+            if(arr[j] > arr[j+1]){
+                swap = true;
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1 ] = temp;
+            }
+        }
+        if (!swap) break;
+    }
+ }
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
 ```
