@@ -309,6 +309,7 @@ public static int[] topKFrequent(int[] nums, int k) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+test("Aabb", "bbAa");
 public static String frequencySort(String s) {  
     // Считаем частоты символов  
     Map<Character, Integer> freqMap = new HashMap<>();  
@@ -339,6 +340,7 @@ public static String frequencySort(String s) {
     }  
     return sb.toString();  
 }
+
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
