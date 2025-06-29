@@ -230,36 +230,7 @@ public static int[] greatNode(Node head){
 интервалы 2
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-> int[] nums1 = {1, 1, 1, 2, 2, 3}; 
-> int k1 = 2; 
-> int[] expected1 = {1, 2};
 
-public static int[] topKFrequent(int[] nums, int k) {
-    if (nums == null) return new int[0];
-    Map<Integer, Integer> map = new HashMap<>();
-    for(int n : nums){
-        map.put(n, map.getOrDefault(n, 0)+1);
-    }
-    List<Integer>[] bukets = new List[nums.length+1]; // из-за freq>1 всегда
-    for (int i = 0; i<bukets.length; i++){
-        bukets[i] = new ArrayList<>();
-    }
-    for(int num : map.keySet()){
-        int freq = map.get(num);
-        bukets[freq].add(num); // ####
-    }
-    List<Integer> preRes = new ArrayList<>();
-    for (int i = bukets.length-1; i>=0; i--){
-        if(preRes.size() == k) break;
-        preRes.addAll(bukets[i]);
-    }
-
-    int[] res = new int[k];
-    for(int i = 0; i<k; i++){
-        res[i] = preRes.get(i);
-    }
-    return res;
-}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Video Stitching
 
