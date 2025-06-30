@@ -417,6 +417,67 @@ public static int[] intersect(int[] nums1, int[] nums2) {
     пятый — количество элементов
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+анаграммы и , Простые числа и Матеша
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+{"anagram", "nagaram"}, // true
+public static boolean isAnagram(String s, String t) {  
+    if(s.length() != t.length())return false;
+    int[] count = new int[26]; // 26 engl simbols in alphabet
+    for(char c : s.toCharArray()){
+        count[c-'a']++;
+    }
+    for(char c : t.toCharArray()){
+        if(count[c-'a'] <= 0) return false;
+        else count[c-'a']--;
+    }
+    return true;
+}
+public static boolean isAnagram(String s, String t) {
+    Map<Character, Integer> map = new HashMap<>();
+    if(s.length() != t.length())return false;
+    for(char c : s.toCharArray()){
+        map.put(c, map.getOrDefault(c, 0) + 1);
+    }
+    for(char c : t.toCharArray()){
+        if(!map.containsKey(c) || map.get(c) == 0) return false;
+        else map.put(c, map.get(c) - 1);
+    }
+    return true;
+}
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
