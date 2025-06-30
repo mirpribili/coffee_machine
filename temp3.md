@@ -342,11 +342,80 @@ public static String frequencySort(String s) {
 }
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+citations1{3,  0,  6,  1,  5}; size=5
+Индексы:   0   1   2   3   4   5
+Значения: [1,  1,  0,  1,  0,  2]
+res 3
+public int hIndex(int[] citations) {
+    int h = citations.length;
+    int[] count = new int[h + 1];
+    for(int i : citations){
+        if(i >= h){
+            count[h]++;
+        } else {
+            count[i]++;
+        }
+    }
+    int total = 0;
+    for(int i = h; i>=0; i--){
+        total += count[h];
+        if (total >= h) return i;
+    }
+    return 0;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Array Partition
+nums = [1][1][1][4][3][2]
+оптимальное разбиение (1,1), (1,2), (3,4), 
+где сумма минимумов равна 1+ 1 + 3 = 5
+public int arrayPairSum(int[] nums) {
+    int[] count = new int[20_001]; // -10^4, 10^4
+    for(int i : nums){
+        count[i + 10_000] ++;
+    }
+    int res = 0;
+    boolean notOdd = true; // even
+    for(int i = 0; i<count.length; i++){
+        while(count[i] > 0){
+            if(notOdd){
+                res += i - 10_000; // ######!!!!
+                notOdd = false;
+            }else{
+                notOdd = true;
+            }
+            count[i]--; // ######
+        }
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input nums1: [4, 9, 5]
+Input nums2: [9, 4, 9, 8, 4]
+Expected: [4, 9] или [9, 4]
+public static int[] intersect(int[] nums1, int[] nums2) {  
+    int[] count = new int[1001]; // диапазон элементов от 0 до 1000
+    for(int i : nums1){
+        count[i]++;
+    }
+    int idx = 0;
+    int[] preRes = new int[Math.min(nums1.length, nums2.length)];
+    for(int i : nums2){
+        if(count[i] > 0){
+            preRes[idx] = i;
+            idx++;
+            count[i] --;
+        }
+    }
+    int[] res = new int[idx];
+    System.arraycopy(preRes, 0, res, 0, idx);
+    return res;
 
+    первый аргумент должен быть источником, 
+    второй — началом копирования, 
+    третий — приемником, 
+    четвертый — с какого индекса приемника, 
+    пятый — количество элементов
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
