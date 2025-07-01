@@ -358,7 +358,7 @@ public int hIndex(int[] citations) {
     }
     int total = 0;
     for(int i = h; i>=0; i--){
-        total += count[h];
+        total += count[i];
         if (total >= h) return i;
     }
     return 0;
