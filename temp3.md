@@ -512,7 +512,26 @@ public int countOrGetPrimes(int n) {
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+//__int Max _2_147_483_647
+//__int Min -2_147_483_648
+testReverse(1_563_847_412, 0);
+testReverse(120, 21); 
+testReverse(0, 0); 
+public static int reverse(int x) {
+    int res = 0;
+    while(x != 0){
+        int digit = x % 10;
+        x = x / 10;
+        if(res > Integer.MAX_VALUE /10 || 
+            (res == Integer.MAX_VALUE/10 && digit > 7)
+            ) return 0;
+        if(res < Integer.MIN_VALUE /10 || 
+            (res == Integer.MIN_VALUE/10 && digit < -8)
+            ) return 0;
+        res = res * 10 + digit;
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
