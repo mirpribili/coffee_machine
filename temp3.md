@@ -450,9 +450,67 @@ public static boolean isAnagram(String s, String t) {
 }
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+49. Group Anagrams
+Input: ["eat","tea","tan","ate","nat","bat"] 
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
+public List<List<String>> groupAnagrams(String[] strs) {
+    Map<String, List<String>> map = new HashMap<>(); // ####
+    for(String s : strs){
+        //char[] c = s.toCharArray();
+        //Arrays.sort(c);
+        //String key = new String(c); /// ####
+
+        /// var 2_
+        int[] count = new int[26]; // eng alphabet
+        for(char c : s.toCharArray()){
+            count[ c - 'a' ]++;
+        }
+        StringBuilder preKey = new StringBuilder();
+        for(int i = 0; i<26; i++){
+            preKey.append(count[i]).append('_');
+        }
+        String key = preKey.toString();
+        /// var 2^
+
+        map.putIfAbsent(key, new ArrayList<>());
+        map.get(key).add(s);
+    }
+    return new ArrayList<>(map.values());
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Изначально:  2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Шаг 1 (кратные 2): 2 3 x 5 x 7 x 9 x 11 x 13 x 15 x 17 x 19 x
+Шаг 2 (кратные 3): 2 3 x 5 x 7 x x x 11 x 13 x x x 17 x 19 x
+Шаг 3 (кратные 5): 2 3 x 5 x 7 x x x 11 x 13 x x x 17 x 19 x
+Шаг 4 (кратные 7): 2 3 x 5 x 7 x x x 11 x 13 x x x 17 x 19 x
+Простые: 2 3 5 7 11 13 17 19
 
+public int countOrGetPrimes(int n) {
+    if(n <= 2) return 0;
+    boolean[] res = new boolean[n];
+    for(int i = 2; i<n; i++){
+        res[i] = true;
+    }
+    for(int i = 2; i * i<n; i++){
+        for(int j = i * i; j < n; j += i ){ // при i = 0 бес цикл
+            res[j] = false;
+        }
+    }
+    int count = 0;
+    for(int i = 2; i<n; i++){
+        if(res[i]) count++;
+    }
+    return count;
+
+    int[] resalt = new int[count];
+    int idx = 0;
+    for(int i = 0; i<n; i++){
+        if(res[i]){
+            result[idx++] = i;
+        }
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
