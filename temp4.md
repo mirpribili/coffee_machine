@@ -91,6 +91,7 @@ public static int maximumProduct(int[] nums) {
     return Math.max(max1 * max2 * max3, max1 * min1 * min2); // ######
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+2 простое число
 public static boolean isThree(int n) {
     if(n < 2) return false;
     int root = (int) Math.pow(n, 0.5);
