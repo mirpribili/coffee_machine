@@ -348,18 +348,6 @@ public class Immutable2DRangeSum {
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-public int missingNumber(int[] nums) {
-    int max = nums.length;
-    int res = 0;
-    for (int i = 0; i<max; i++){
-        res ^=nums[i];
-    }
-    for(int i =0; i<=max; i++){
-        res ^=i;
-    }
-    return res;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 3 в двоичном виде: 011  
 2 в двоичном виде: 010
 011 XOR 010 = 001 (в двоичной) = 1 (в десятичной)
@@ -429,6 +417,9 @@ public static boolean isMonotonic(int[] nums) {
     return true;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[] test1 = {1, 3, 5, 4, 7};
+int expected1 = 3; // [1,3,5]
+
 public int findLengthOfLCIS(int[] nums) {
     if (nums == null) return 0;
     int l = nums.length;
