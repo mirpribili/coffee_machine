@@ -494,7 +494,64 @@ private int dfs(int i, int j){
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] grid3 = {
+        {1, 0, 0},
+        {1, 1, 0},
+        {1, 1, 0}
+};
+int expected3 = -1;
+int[][] grid2 = {
+        {0, 0, 0},
+        {1, 1, 0},
+        {1, 1, 0}
+};
+int expected2 = 4;
+private int[][] directions = new int[][]{
+    {-1, -1}, {0, -1}, {1, -1},
+    {-1,  0},          {1,  0},
+    {-1,  1}, {0,  1}, {1,  1}
+};
 
+public int shortestPathBinaryMatrix(int[][] grid) {
+    if(grid == null || grid.length == 0) return -1;
+    int rc = grid.length; // rowsAndCols всегда квадрат
+
+    if(grid[0][0] == 1 || grid[rc -1][rc -1] == 1) return -1; // заняты нач или конец
+
+    boolean[][] visited = new boolean[rc][rc];
+
+
+
+    Queue<int[]> que = new LinkedList<>();
+    que.offer(new int[]{0, 0, 1}); // x , y , distance
+    visited[0][0] = true;
+
+    while(!que.isEmpty()){
+        int[] temp = que.poll();
+        int x = temp[0];
+        int y = temp[1];
+        int dis = temp[2];
+        
+
+
+        if(x == rc -1 && y == rc - 1) return dis;
+
+        for(int[] i : directions){
+            int xx = i[0] + x;
+            int yy = i[1] + y;
+            if( 
+                xx >= 0 && yy >= 0 &&
+                xx<rc && yy<rc &&
+                visited[xx][yy] == false &&
+                grid[xx][yy] == 0
+                ){
+                visited[xx][yy] = true; // #####
+                que.offer(new int[]{xx, yy, dis+1});
+            }
+        }
+    }
+    return -1;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
