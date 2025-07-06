@@ -459,7 +459,40 @@ private void bfs(int i, int j) {
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+1 - земля, 0 - вода):
+0 0 1 0
+1 1 1 0
+0 1 0 0
+res = 5
 
+private int rows;  
+private int cols;
+private int[][]b;
+public int maxAreaOfIsland(int[][] grid) {
+    if(grid == null || grid.length == 0 || grid[0].length == 0) return 0; // java
+    rows = grid.length;
+    cols = grid[0].length;
+    b = grid;
+    int res = 0;
+    for(int i = 0; i<rows; i++){
+        for(int j = 0; j<cols; j++){
+            if(b[i][j] == 1){
+                res = Math.max(res, dfs(i, j));
+            }
+        }
+    }
+    return res;
+}
+private int dfs(int i, int j){
+    if(i < 0 || j < 0 || i >= rows || j >= cols || b[i][j] == 0) return 0;
+    int res = 1;
+    b[i][j] = 0; // топим
+    res += dfs(i +1, j);
+    res += dfs(i -1, j);
+    res += dfs(i, j +1);
+    res += dfs(i, j -1);
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
