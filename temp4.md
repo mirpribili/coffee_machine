@@ -393,6 +393,7 @@ private int rows;
 private int cols;
 private char[][] copy;
 public int numIslands(char[][] grid) {
+    if (grid == null || grid.length == 0) return 0;
     rows = grid.length;
     cols = grid[0].length;
     copy = new char[rows][cols];
