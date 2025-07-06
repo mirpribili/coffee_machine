@@ -303,8 +303,10 @@ int[][] prereq1 = {{1,0}, {2,1}, {3,0}, {2,3}};
  \      ↑
   → 3 --- 
 
+private List<Integer> orde = new ArrayList<>(); // если хочется увидить рез топ сорт 
 
 public boolean canFinish(int numCourses, int[][] prerequisites) {
+    /// orde.clean();
     List<List<Integer>> graph = new ArrayList<>();
     for(int i =0; i<numCourses; i++) graph.add(new ArrayList<>());
     for(int[] i : prerequisites){
@@ -319,6 +321,8 @@ public boolean canFinish(int numCourses, int[][] prerequisites) {
     for(int i =0; i<numCourses; i++){
         if(hasCycle(i, onPath, visited, graph)) return false;
     }
+/// Collections.resort(order);
+/// System.out.println(order);
     return true;
 }
 private static boolean hasCycle(int i, boolean[] onPath, boolean[] visited, List<List<Integer>> graph){
@@ -331,10 +335,51 @@ private static boolean hasCycle(int i, boolean[] onPath, boolean[] visited, List
     }
     onPath[i] = false;
     visited[i] = true;
+/// orde.add(i);
     return false;
-}
+} O(V + E), где V — курсы, E — зависимости ВРЕМЯ И ПАМЯТЬ
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+  ->1->3
+ /     /^
+0 -> 2
+int[][] prereq2 = {{1,0},{2,0},{3,1},{3,2}}; 
+0{1,2}, 1{3}, 2{3}
+int[] res2 = solver.findCourseOrder(4, prereq2); 
+Expected: [0, 1, 2, 3] or [0, 2, 1, 3] (dfs reverse)
 
+
+public int[] findCourseOrder(int numCourses, int[][] prerequisites) {
+    List<List<Integer>> graph = new ArrayList<>();
+    for(int i = 0; i<numCourses;i++)grap.add(new ArrayList<>());
+
+    int[] indegree = new int[numCourses];
+
+    for(int[] i : prerequisites){
+        grap.get(i[1]).add(i[0]);
+        indegree[i[0]]++;
+        //  0  1  2  3 -- number curse
+        // [0, 1, 1, 2]
+        // или даже так
+        // [0, 1, 0, 2]
+    }
+
+    Queue<Integer> que = new LinkedList<>();
+    for (int i = 0; i < numCourses; i++){ ///##### BAD-> for(int i: indegree)
+        if(indegree[i] == 0) que.offer(i);
+    }
+    int idx = 0;
+    int[] res = new int[numCourses]; // так нет рекурсии можно не бояться
+
+    while(!que.isEmpty()){
+        int course = que.poll();
+        res[idx++] = course;
+        for (int i : grap.get(course)){ // grap    0{1,2}, 1{3}, 2{3}
+            indegree[i]--;             // indegree [0, 1, 1, 2]
+            if(indegree[i] == 0) que.offer(i); // если 0 значит нет цикла
+        }
+    }
+    return numCourses == idx ? res : new int[0];
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
