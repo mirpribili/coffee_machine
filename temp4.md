@@ -381,7 +381,51 @@ public int[] findCourseOrder(int numCourses, int[][] prerequisites) {
     return numCourses == idx ? res : new int[0];
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+grid1 = {
+    {'1','1','0','0','0'},
+    {'1','1','0','0','0'},
+    {'0','0','1','0','0'},
+    {'0','0','0','1','1'}
+};
+res = 3;
 
+private int rows;
+private int cols;
+private char[][] copy;
+public int numIslands(char[][] grid) {
+    rows = grid.length;
+    cols = grid[0].length;
+    copy = new char[rows][cols];
+
+    for(int i = 0; i<rows; i++){
+        for(int j = 0; j<grid[0].length; j++){
+            copy[i][j] = grid[i][j];
+        }
+    }
+    int res = 0;
+    for(int i = 0; i<rows; i++){
+        for(int j = 0; j<cols; j++){
+            if(copy[i][j] == '1'){
+                res++;
+                dfs(i, j);
+            }
+        }
+    }
+    return res;
+}
+private void dfs(int i, int j){
+    if(
+        i < 0 || j < 0 ||
+        i >= rows || j >= cols || /// ##### i >= rows
+        copy[i][j] == '0'
+    ) return;
+
+    copy[i][j] = '0'; // топим остров
+    dfs(i -1, j);
+    dfs(i +1, j);
+    dfs(i, j -1);
+    dfs(i, j +1);
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
