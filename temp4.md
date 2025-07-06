@@ -427,6 +427,37 @@ private void dfs(int i, int j){
     dfs(i, j -1);
     dfs(i, j +1);
 }
+
+private void bfs(int i, int j) {
+    if(b[i][j] != 'O') return; /// ####
+    Queue<int[]> que = new LinkedList<>();
+    que.offer(new int[]{i, j});
+
+    b[i][j] = 'S';
+
+    int[][] directions = new int[]{{1,0}, {-1,0}, {0,1}, {0,-1}};
+    while(!que.isEmpty()){
+        int[] newIJ = que.poll();
+        int ii = newIJ[0];
+        int jj = newIJ[1];
+
+
+        for(int[] temp : directions){
+            int x = temp[0] + ii;
+            int y = temp[1] + jj;
+
+            if( 
+                    x >= 0 && y >= 0 &&
+                    x < rows && y < cols &&
+                    // важно в конце сделать
+                    b[x][y] == 'O'
+            ){
+                que.offer(new int[]{x, y});
+                b[x][y] = 'S';
+            }
+        }
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
