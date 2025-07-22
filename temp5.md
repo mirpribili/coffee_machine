@@ -148,9 +148,57 @@ private List<String> drawBoard(int[] queen){
     return temp;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input: 3
+Output: [((())), (()()), (())(), ()(()), ()()()]
+брут: O(2^2n ) по времени, т.к. перебираем все строки из 2n символов '(' и ')'.
+реку: Сn ное число Каталана тк выбир только валидные
 
+public List<String> generateParentheses(int n) {
+    List<String> res = new ArrayList<>();
+    backtrack(res, new StringBuilder(), n, 0, 0);
+    return res;
+}
+private void backtrack(List<String> res, StringBuilder cur, int max, int open, int close){
+    if(cur.length() == max * 2){
+        res.add(cur.toString());
+        return;
+    }
+    if(open < max){
+        cur.append('(');
+        backtrack(res, cur, max, open + 1, close);
+        cur.deleteCharAt(cur.length() - 1);
+    }
+    if(close < open){
+        cur.append(')');
+        backtrack(res, cur, max, open, close + 1);
+        cur.deleteCharAt(cur.length() - 1);
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+candidates = {2, 4, 6, 8};
+target = 8;
+Output: [[2, 2, 2, 2], [2, 2, 4], [2, 6], [4, 4], [8]]
 
+public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    List<List<Integer>> res = new ArrayList<>();
+    backtrack(0, res, candidates, target, new ArrayList<>());
+    return res;
+}
+private void backtrack(int start, List<List<Integer>> res, 
+                        int[] candidates, int target, List<Integer> cur){
+    if(target == 0){
+        res.add(new ArrayList<>(cur)); // ### for stop change loc cur
+        return;
+    } else if(target < 0){
+        return;
+    }
+    for(int i = start; i<candidates.length; i++){
+        cur.add(candidates[i]);
+        backtrack(i, res, candidates, target - candidates[i], cur);
+        // ### Если i + 1, то каждый элемент можно использовать только один раз
+        cur.remove(cur.size() - 1); // .length() BAD for list
+    }
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
