@@ -200,19 +200,57 @@ private void backtrack(int start, List<List<Integer>> res,
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
+Slide Window
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+INP {0, 1, 2, 4, 5, 7};
+OUT {"0->2", "4->5", "7"}
+public List<String> summaryRanges(int[] nums) {
+    int i = 0;
+    List<String> res = new ArrayList<>();
+    while(i < nums.length){
+        int j = i;
+        while(j + 1 < nums.length && nums[j + 1] == nums[j] + 1){
+            j++;
+        }
 
+        if(i == j){
+            res.add(String.valueOf(nums[i]));
+        }else{
+            res.add(nums[i] + "->" + nums[j]);
+        }
+        i = j + 1;
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[] test1 = {1,1,1,0,0,};
+int k1 = 2;
+int expected1 = 5;
 
+int[] test1 = {1,1,1,0,0,  0,1,1,1,1,0};
+int k1 = 2;
+int expected1 = 6;
+
+public int findMaxConsecutiveOnes(int[] nums, int k) {
+    int res = 0;
+    int zero = 0;
+    int left = 0;
+    for(int right = 0; right < nums.length; right++){
+        if(nums[right] == 0){
+            zero++;
+        }
+        while(zero > k){
+            if(nums[left] == 0) zero--;
+            left++;
+        }
+        res = Math.max(res, right - left + 1);
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
