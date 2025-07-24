@@ -252,9 +252,45 @@ public int findMaxConsecutiveOnes(int[] nums, int k) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+String[] tests = {"abcabcbb", "bbbbb", "pwwkew", "dvdf"};
+int[] expected = {3, 1, 3, 3};
 
+
+public static int lengthOfLongestSubstring(String s) {
+    int res = 0;
+    int[] ansi = new int[128];
+    for(int i =0, j = 0; j<s.length(); j++){
+        i = Math.max(ansi[ s.charAt(j) ], i);
+        res = Math.max(res,  j - i + 1 );
+        ansi[ s.charAt(j) ] = j + 1;
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input: seats = [1,0,0,0,1,0,1]
+Output: 2
 
+Input: seats = [1,0,0,0]
+Output: 3
+
+public static int maxDistToClosest(int[] seats) {
+    int res = 0;
+    int left = -1;
+    for(int right = 0; right<seats.length; right++){
+        if(seats[right] == 1){
+            if(left == -1){
+                res = right;
+            } else {
+                res = Math.max(res, (right - left)/2 );
+            }
+            left = right;
+        }
+    }
+    if(seats[seats.length - 1] == 0){
+        res = Math.max(res, seats.length - 1 - left);
+    }
+    return res;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
