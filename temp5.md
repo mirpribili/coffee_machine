@@ -292,11 +292,90 @@ public static int maxDistToClosest(int[] seats) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+S1 "ab", S2 "eidbaooo", "true"
+S1 "ab", S2 "eidboaoo", "false"
+public static boolean checkInclusion(String s1, String s2) { 
+    if(s1.length() > s2.length()) return false;
+    int[] abc = new int[26];
+    for (int i = 0; i < s1.length()){
+        abc[s1.charAt(i) - 'a'] --;
+        abc[s2.charAt(i) - 'a'] ++; // #####
+    }
+    if(allZero(abc)) return true;
 
+    for(int i = s1.length(); i<s2.length(); i++){
+        abc[s2.charAt(i) - 'a'] ++;
+        abc[s2.charAt(i - s1.length()) - 'a'] --;
+        if(allZero(abc)) return true;
+    }
+    return false;
+}
+private static boolean allZero(int[] abc){
+    for(int i = 0; i<abc.length; i++){
+        if(abc[i] != 0) return false;
+    }
+    return true;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+s1 = "ADOBECODEBANC", t1 = "ABC";
+Ожидаемый: BANC
+        
+public static String minWindow(String s, String t) {
+    if(s == null || t == null || s.length() < t.length() ) return "";
+    int need[] = new int[128];
+    for(int i = 0; i<t.length(); i++){
+        need[t.charAt(i)]++;
+    }
 
+    int minLen = Integer.MAX_VALUE;
+    int start = 0;
+    int left = 0;
+    int right = 0;
+    int window[] = new int[128];
+    int count = 0;
+
+    while(right<s.length()){
+        window[ s.charAt(right) ] ++;
+        if( window[ s.charAt(right) ] <= need[ s.charAt(right) ] ) count++;
+
+        while(count == t.length()){
+            if(right - left + 1 < minLen){
+                minLen = right - left + 1;
+                start = left;
+            }
+            window[ s.charAt(left) ]--;
+            if(window[ s.charAt(left) ] < need[ s.charAt(left) ]) count--;
+            left++;
+        }
+        right++;
+    }
+    return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+nums1 = {1, 3, -1, -3, 5, 3, 6, 7};
+k1 = 3;
+expected1 = {3, 3, 5, 5, 6, 7};
 
+public int[] maxSlidingWindow(int[] nums, int k) {
+    if(nums == null || k <= 0 || nums.length == 0 ) return new int[];
+
+    Deque<Integer> deq = new ArrayDeque<>();
+    int[] res = new int[nums.length - k + 1];
+    for(int i = 0; i<nums.length; i++){
+        while(!deq.isEmpty() && deq.peekFirst() < i - k + 1 ) deq.pollFirst();
+        
+        while(!deq.isEmpty() && nums[deq.peekLast()] < nums[i] ) deq.pollLast();
+
+        deq.offerLast(i);
+
+        if(i >= k - 1){
+            res[i - k + 1] = nums[deq.peekFirst()]; // in=[12]3 k=2 res=[2]3
+        }
+    }
+    return res;
+}
+В начале очереди — индекс максимума.
+В конце — индексы меньших элементов, которые ещё не "вышли" из окна.
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
