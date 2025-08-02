@@ -28,6 +28,9 @@ public static int[] mergeTwoSorted(int[] a, int[] b) {
     return c;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(n)  O(n)
+Вставка и поиск в hashMap — амортизированное O(1)
+
 public static int[] twoSumMap(int[] nums, int target) {  
         Map<Integer, Integer> map = new HashMap<>();  
   
@@ -41,6 +44,8 @@ public static int[] twoSumMap(int[] nums, int target) {
         throw new IllegalArgumentException("No two sum solution");  
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(n log n) (из-за сортировки)	O(n)
+
 public static int[] twoSum(int[] nums, int target) {  
     // Создаем массив пар: [значение, исходный индекс]  
     int[][] numsWithIndex = new int[nums.length][2];  
@@ -285,7 +290,9 @@ public static void main(String[] args) {
 hash
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2017
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(1) (фиксированное поле 9x9) O(1) (фиксированное поле)
+
 public static boolean isValidSudoku(char[][] board){
     Set<String> seen = new HashSet<>();
     for (int i = 0; i<board.length; i++){
@@ -302,7 +309,7 @@ public static boolean isValidSudoku(char[][] board){
     }
     return true;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 2033
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 public boolean isIsomorphic(String s, String t){
     if(s.length() != t.length()) return false;
     Map<Character, Character> mapST = new HashMap<>();
@@ -326,7 +333,7 @@ public boolean isIsomorphic(String s, String t){
     }
     return true;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2043-2046
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 public static boolean isReflected(int[][] points){
     if (points.length == 0) return true;
     int minX = Integer.MAX_VALUE;
@@ -356,7 +363,7 @@ public static boolean isReflected(int[][] points){
     }
     return true;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2100
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 30m
 public class LRUcache {
     private final int capacity;
     private final LinkedHashMap<Integer, Integer> cache;
@@ -375,6 +382,71 @@ public class LRUcache {
     }
     public void put(int key, int value) {
         cache.put(key, value);
+    }
+}
+
+
+---- HAND MADE ---- ---- HAND MADE ---- ---- HAND MADE ---- ---- HAND MADE ----
+
+public class LRUCache {
+    private class Node {
+        int key, value;
+        Node prev, next;
+        Node(int k, int v) {
+            key = k;
+            value = v;
+        }
+    }
+
+    private int capacity;
+    private HashMap<Integer, Node> map;
+    private Node head, tail;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        map = new HashMap<>();
+        head = new Node(0, 0); // фиктивный head
+        tail = new Node(0, 0); // фиктивный tail
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1;
+        Node node = map.get(key);
+        remove(node);
+        insertAtHead(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            node.value = value;
+            remove(node);
+            insertAtHead(node);
+        } else {
+            if (map.size() == capacity) {
+                Node toRemove = tail.prev;
+                remove(toRemove);
+                map.remove(toRemove.key);
+            }
+            Node newNode = new Node(key, value);
+            insertAtHead(newNode);
+            map.put(key, newNode);
+        }
+    }
+
+    private void remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    private void insertAtHead(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2114 - 2130
