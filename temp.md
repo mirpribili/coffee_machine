@@ -449,7 +449,11 @@ public class LRUCache {
         head.next = node;
     }
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -2114 - 2130
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+ A = {1, 3, 2, 4};
+ B = {3, 1, 2, 4};
+[0, 2, 3, 4]
+
 public int[] findThePrefixCommonArray(int[] A, int[] B) {
     Set<Integer> seen = new HasSet<>();
     int[] result = new int[A.length];
@@ -467,6 +471,10 @@ public int[] findThePrefixCommonArray(int[] A, int[] B) {
     return result;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(n²) O(n)
+{-1,0,1,2,-1,-4};
+[[-1, -1, 2], [-1, 0, 1]]
+
 public static List<List<Integer>> sum3(int[] ar) {
     Arrays.sort(ar);
     List<List<Integer>> res = new ArrayList<>(); // Исправлено
@@ -493,6 +501,11 @@ public static List<List<Integer>> sum3(int[] ar) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+{1, 0, -1, 0, -2, 2}, 0);
+[[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
+O(n³) O(n)
+
+
 public static List<List<Integer>> sum4(int[] num, int t){
     List<List<Integer>> res = new ArrayList<>();
     if(num == null || num.length < 4) return res; #####
@@ -522,7 +535,12 @@ public static List<List<Integer>> sum4(int[] num, int t){
     }
     return res;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -20m
+ {1, 2, 3, 3, 4, 5, 6}
+ {3, 3, 5}
+ [3, 3, 5]
+O(n + m)  O(min(n, m))
+
 public static int[] intersection(int[] a1, int[] a2){
     Map<Integer, Integer> map = new HashMap<>();
     List<Integer> res = new ArrayList<>();
