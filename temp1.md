@@ -33,6 +33,8 @@ tree
        6   7     9
 **Output:** [1,2,4,5,6,7,3,8,9]
 
+O(n) O(h) (O(log n) для сбалансированных, O(n)
+
 public class TreeNode{
     int val;
     TreeNode left;
@@ -228,9 +230,9 @@ public static int minDepthRec(TreeNode root){
 Path Sum III
 **Input:** 10->5->3->0->0->0 targ = 8
 **Output:** 4
-public static pathSum(TreeNode root, int target){
+public static int pathSum(TreeNode root, int target){
     HashMap<Integer, Integer> map = new HashMap<>();
-    map.put(0,1); // if val == tar
+    map.put(0,1); // if val == targ
     return dfs(root, target, map, 0);
 }
 private static int dfs(TreeNode root, int target, HashMap<Integer, Integer> map, int sum){
@@ -247,6 +249,8 @@ private static int dfs(TreeNode root, int target, HashMap<Integer, Integer> map,
 Binary Tree Level Order Traversal II
 Input: root = [3,9,20,null,null,15,7]
 Output: [[15,7],[9,20],[3]]
+
+O(n) + O(h log h) ~ O(n log n) в худшем случае
 
 public static List<List<Integer> levelOrderTrav(TreeNode root){
     List<List<Integer> list = new ArrayList<>();
@@ -267,7 +271,7 @@ private string void dfs(TreeNode root, List<List<Integer> list, int level){
 массивы
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - - 20m
 **Input**
 ["NumArray", "sumRange", "sumRange", "sumRange"]
 { { {      -2, 0, 3, -5, 2, -1}}, [0, 2], [2, 5], [0, 5] }
