@@ -2,6 +2,252 @@
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+интервалы
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{1,3},{2,6},{8,10},{15,18}};  
+int[][] expected1 = {{1,6},{8,10},{15,18}};
+
+private static boolean isOverLapping(int[] a, int[] b){
+    return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
+}
+private static int[] mergeTwoIntervals(int[] a, int[] b){
+    return new int[]{a[0], Math.max(a[1], b[1])};
+}
+
+public static int[][] merge(int[][] intervals) {
+    if(intervals.length == 0) retutn new int[0][];
+    List<int[]> res = new ArrayList<>();
+    
+    Arrays.sort(intervals, Comarator.compareInt(a->a[0]));
+
+    res.add(intervals[0]);
+    for(int i = 1; i<intervals.length; i++){
+        int[] cur = intervals[i];
+        int[] last = res.get(res.size() - 1);
+        if(isOverLapping(cur, last)){
+            res.set(res.size()-1, mergeTwoIntervals(last, cur));
+        } else {
+            res.add(cur);
+        }
+    }
+    return res.toArray(new int[res.size()][]);
+}
+
+TreeMap<Integer, List<int[]> map = new TreeMap<>();
+// ключ нач интервала а значение список интерв с так началом
+for(int[] inter : intervals){
+    map.computeIfAbsent(interval[0], k->new ArrayList<>()).add(inter);
+}
+List<int[]> sortedIntervals = new ArrayList<>();
+for(List<int[]> list: map.getValues()){
+    sortedIntervals.addAll(list);
+}
+List<int[]> result = new ArrayList<>();  
+result.add(sortedIntervals.get(0)); 
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{0, 30}, {5, 10}, {15, 20}};
+int expected1 = 2;
+
+
+public static int minMeetingRoomsTwoPointer(int[][] intervals) {
+    if (intervals == null || intervals.length == 0 ) return 0;
+    int l = intervals.length;
+
+    int[] start = new int[l];
+    int[] end = new int[l];
+
+    for(int i = 0; i< l; i++){
+        start[i] = intervals[i][0];
+        end[i] = intervals[i][1];
+    }
+    Arrays.sort(start);
+    Arrays.sort(end);
+
+    int endMeet = 0;
+    int room = 0;
+    for(int i=0; i<l; i++){
+        if(start[i] < end[endMeet]){
+            room++;
+        } else {
+            endMeet++;
+        }
+    }
+    return room;
+}
+
+321435 == PriorityQueue
+     1
+    / \
+   3   2
+  / \   \
+ 4   3   5
+
+public static int minMeetingRoomsTwoPointer(int[][] intervals) {
+    if (intervals == null || intervals.length == 0) return 0;
+    PriorityQueue<Integer> queueEnds = new PriorityQueue<>();
+    Arrays.sort(intervals, Comparator.comparingInt(a->a[0]));
+    queueEnds.add(intervals[0][1]);
+    for(int i =1; i<intervals.length; i++){
+        if(intervals[i][0] >= queueEnds.peek()){
+            queueEnds.pool();
+        }
+        queueEnds.add(intervals[i][1]);
+    }
+    return queueEnds.size();
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Car Pooling 
+int[][] trips2 = {{2, 1, 5}, {3, 5, 7}}; 2-pas 1-start 5-end
+> int capacity2 = 5; res=true
+> int capacity1 = 4; res=false
+public boolean canCarPool(int[][] trips, int capacity) {
+        if(trips == null) return false;
+        int[] passengerChanges = new int[1001];
+        for(int[][] t: trips){
+            int pass = t[0];
+            int start = t[1];
+            int end = t[2];
+            passengerChanges[start] += pass;
+            passengerChanges[end] -= pass;
+        }
+        int curPass = 0;
+        for(int[] change : passengerChanges){
+            curPass += change; // #####
+            if (curPass > capacity) return false;
+        }
+        return true;
+}
+Время: O(N + M), где N — число поездок, M — максимальная точка маршрута (1000)
+Память: O(M) (фиксированный массив на 1001 элемент)
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] test1 = {{10, 16}, {2, 8}, {1, 6}, {7, 12}};  
+int expected1 = 2;
+
+Minimum Number of Arrows to Burst Balloons
+public int findMinArrowShots(int[][] balloons) {
+    if(balloons==null || balloons.length == 0)) return 0; //#####
+    Arrays.sort(balloons, Comparator.comparingInt(a->a[1]));
+    int end = balloons[0][1];
+    int arrow = 1;
+    for (int i = 1; i<balloons.length; i++){
+        if(balloons[i][0] > end){
+            arrow++;
+            end = balloons[i][1];
+        }
+    }
+    return arrow;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+int[][] segments1 = {{0, 5}, {-3, 2}, {7, 10}}; 
+int[] points1 = {1, 6};
+int[] expected1 = {2, 0};
+
+public static int[] countSegments(int[][] segments, int[] points) {
+    if(segments == null || segments.length == 0) return new int[0];
+    int l = segments.length;
+
+    int[] start = new int[l];
+    int[] end = new int[l];
+    int[] res = new int[points.length];
+    for(int i = 0; i<l; i++){
+        start[i] = Math.min(segments[i][0], segments[i][1]);
+        end[i]   = Math.max(segments[i][0], segments[i][1]);
+    }
+    Arrays.sort(start);// #######
+    Arrays.sort(end);// #######
+
+    for(int i = 0; i<points.length; i++){
+        int countS = lowerGreedyBand(start, points[i]);
+        int counte = apperBand(end, points[i]);
+        res[i] = countS - counte;
+    }
+    return res;
+}
+private int lowerGreedyBand(int[] ar, int key){
+    int left = 0;
+    int right = ar.length;
+    while(left<right){
+        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
+        if(key >= ar[mid]) left = mid +1;
+        else right = mid;
+    }
+    return left;
+}
+
+private int apperBand(int[] ar, int key){
+    int left = 0;
+    int right = ar.length;
+    while(left<right){
+        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
+        if(key > ar[mid]) left = mid +1;
+        else right = mid;
+    }
+    return left;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Add Two Numbers
+2->4->3 // число 342
+5->6->4 // число 465
+7->0->8 // res
+
+static class Node {  
+    int val;  
+    Node next;  
+    Node(int x) { val = x; }  
+}  
+  
+public Node addTwoNumbers(Node l1, Node l2) {
+    Node dummy = new Node(-100);
+    Node p1 = l1;
+    Node p2 = l2;
+    Node cur = dummy;
+    int carry = 0;
+
+    while(p1 != null || p2 != null){ //######
+        int x = (p1 != null) ? p1.val : 0;
+        int y = (p2 != null) ? p2.val : 0;
+        int sum = x + y + carry;
+        cur.next = new Node(sum%10); /// #####
+        cur = cur.next;
+        carry = sum / 10; // ####
+        if(p1 != null) p1 = p1.next;
+        if(p2 != null) p2 = p2.next;
+    }
+    if(carry > 0) cur.next = new Node(carry);
+    return dummy.next;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+public static int[] addNumbers(int[] arr1, int[] arr2) { 
+    int l1 = arr1.length;
+    int l2 = arr2.length;
+    int k = Math.max(l1, l2);
+    int[] res = new int[k+1]; // + 1 тк доп разряд
+
+    l1--; // ####
+    l2--; // ####
+
+    int carry = 0;
+    while(l1>=0 || l2 >=0){
+        int x = (l1>=0) ? arr1[l1] : 0;
+        int y = (l2>=0) ? arr2[l2] : 0;
+        int sum = x + y + carry;
+        carry = sum / 10;
+        res[k] = sum % 10;
+        l1--;
+        l2--;
+        k--;
+    }
+    if(carry == 0 ) return Arrays.copyOfRange(res, 1, res.length);
+    else res[k] = carry;
+
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Backtracking
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
