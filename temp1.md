@@ -275,7 +275,7 @@ private string void dfs(TreeNode root, List<List<Integer> list, int level){
 **Input**
 ["NumArray", "sumRange", "sumRange", "sumRange"]
 { { {      -2, 0, 3, -5, 2, -1}}, [0, 2], [2, 5], [0, 5] }
->      0.  1.  2.  3. 4.  5.
+>           0. 1. 2.  3. 4.  5.
 **Output**
 [null, 1, -1, -3] 1й нал это глюк вызова конструктора в литкоде
 
@@ -308,17 +308,50 @@ public static int findPivotIndex(int[] nums) {
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Subarray Sum Equals K
-> {3, 2, 1}. k = 3.   res = 2	Подмассивы: {3}, {2, 1}
+> {3, 2, 1}. k = 3.   res = 2	                   (Подмассивы: {3}, {2, 1})
 
+inp     -2   2  -2   2   3
+map  0¹ -2¹  0² -2²  0³  3¹
+i        0   1*  2   3*  4
+m-k     -5  -3  -5  -3   0
+res      0   0   0   0   3
+[-2, 2, -2, 2, 3]
+[-2, 2, 3]
+[3]
 public static int countSubarrays(int[] nums, int k) {
     int res = 0;
     int sum = 0;
     HashMap<Integer, Integer> map = new HashMap<>();
     map.put(0, 1);
+
     for(int n : nums){
         sum += n;
         res += map.getOrDefault(sum - k, 0);
-        map.put(sum, map.getOrDefault(sum, 0));
+        map.put(sum, map.getOrDefault(sum, 0) +1);
+    }
+    return res;
+}
+
+-    -   -  - - Full version - -  -   -     -
+
+public static List<List<Integer>> countSubarrays(int[] nums, int k) {
+    List<List<Integer>> res = new ArrayList<>();
+    Map<Integer, List<Integer>> map = new HashMap<>();
+    map.put(0, new ArrayList<>(List.of(0))); /// ### List.of(0) не мутабельный
+    int sum = 0;
+    for(int i = 0; i<nums.length; i++){
+        sum += nums[i];
+        if (map.contains(sum - k)){
+            for(int start : map.get(sum - k)){
+                List<Integer> temp = new ArrayList<>();
+                for(int j = start; j <= i; j++){
+                    temp.add(nums[j]);
+                }
+            }
+            res.add(temp);
+        }
+        map.putIfAbsent(sum, new ArrayList<>());
+        map.get(sum).add(i+1);
     }
     return res;
 }
@@ -335,6 +368,9 @@ public static int countSubarrays(int[] nums, int k) {
 45 = 27 + 21 + 9 - 12
 sum = 45 - 12 - 6 + 1 = 28
 ==
+Конструктор	O(r * c)	O(r * c)
+Метод sumRegion	O(1)	O(1)
+
 public class Immutable2DRangeSum {
     int[][] psum;
     Immutable2DRangeSum(int[][] matx){
@@ -352,10 +388,45 @@ public class Immutable2DRangeSum {
     }
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+k = 2;
+expected2 = {
+{45, 45, 45},
+{45, 45, 45},
+{45, 45, 45}
+
+Matrix Block Sum
+public int[][] matrixBlockSum(int[][] mat, int k) {
+    int r = mat.length;
+    int c = mat[0].length;
+
+    int[][] psum = new int[r+1][c+1];
+    for(int i = 1; i <=r; i++){
+        for(int j = 1; j <=c; j++){
+            psum[i][j] = mat[i-1][j-1] + psum[i][j-1] + psum[i-1][j] - psum[i-1][j-1];
+        }   
+    }
+    int[][] res = new int[r][c];
+    for(int i = 0; i <r; i++){
+        for(int j = 0; j <c; j++){
+            int r1 = Math.max(0, i -k);
+            int c1 = Math.max(0, j -k);
+            int r2 = Math.min(r - 1, i +k);
+            int c2 = Math.min(c - 1, j +k);
+
+            res[i][j] = psum[r2 +1][c2 +1] + psum[r1][c1] 
+                - psum[r1][c2+1] - psum[r2+1][c1];
+        }   
+    }
+    return res;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+4 в двоичном виде: 100
 3 в двоичном виде: 011  
 2 в двоичном виде: 010
 011 XOR 010 = 001 (в двоичной) = 1 (в десятичной)
 
+{3, 0, 1},
+2
 public int missingNumber(int[] nums) {
     int max = nums.length;
     int res = 0;
@@ -368,7 +439,10 @@ public int missingNumber(int[] nums) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-Input:[3 1 2 5 3] 
+i      0  1  2  3  4
+Input:[3  1  2  5  3] 
+i-1    2  0  1  4  2     // по усл от 1 до n
+* -1  -3 -1 -2  5 -3 
 Output:[3, 4] 
 
 public static int[] findRepeatAndMissing(int[] nums) {
@@ -381,7 +455,7 @@ public static int[] findRepeatAndMissing(int[] nums) {
         else rep = num[ix] * -1; 
     }
     for(int i = 0; i<nums.length; i++){
-        if(nums[i] > 0) mis = i - 1; // index i > 0 только если егр нет в ix
+        if(nums[i] > 0) mis = i + 1; // index i > 0 только если егр нет в ix
     }
     return new int[]{rep, mix};
 }
@@ -449,7 +523,8 @@ public int compress(char[] chars) {
             res++;
             read++;
         }
-        chars[write++] = cur;
+        chars[write] = cur;
+        write++;
         if(res>1){
             String resAr = Integer.toString(res);
             for(char c : resAr.toCharArray()){
@@ -508,10 +583,8 @@ public static int maxProduct(int[] nums) {
         if(n > max1){
             max2 = max1;
             max1 = n;
-        }
-        if(n > max1) max1 = n;
+        } else if(n > max2) max2 = n;
     }
-
     return (max1-1)*(max2-1);
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
@@ -529,37 +602,18 @@ public static int findHighestAltitude(int[] gain) {
     return max;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-Matrix Block Sum
-public int[][] matrixBlockSum(int[][] mat, int k) {
-    int r = mat.length;
-    int c = mat[0].length;
-
-    int[][] psum = new int[r+1][c+1];
-    for(int i = 1; i <=r; i++){
-        for(int j = 1; j <=c; j++){
-            psum[i][j] = mat[i-1][j-1] + psum[i][j-1] + psum[i-1][j] - psum[i-1][j-1];
-        }   
-    }
-    int[][] res = new int[r][c];
-    for(int i = 0; i <r; i++){
-        for(int j = 0; j <c; j++){
-            int r1 = Math.max(i, i -k);
-            int c1 = Math.max(j, j -k);
-            int r2 = Math.min(r - 1, i +k);
-            int c2 = Math.min(c - 1, j +k);
-
-            res[i][j] = psum[r2 +1][c2 +1] + psum[r1][c1] 
-                - psum[r1][c2+1] - psum[r2+1][c1];
-        }   
-    }
-    return res;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Number of Submatrices That Sum to Target
 [1, 1]
 [1, 1]
 t=1 res =4
 
+int[][] matrix2 = 
+      {1, -1},
+      {-1, 1}
+target2 = 0;
+expected2 = 5;
+
+O(row² × col²) O(col)
 public static int numSubmatrixSumTarget(int[][] ar, int target) {
     if(ar == null) return 0;
     int row = ar.length;
@@ -586,270 +640,10 @@ private static int sumSubArr(int[] ar, int t){
     for(int i=0; i<ar.length; i++){
         sum += ar[i];
         res += map.getOrDefault(sum-t, 0);
-        map.put(sum,map.getOrDefault(sum, 0)+1);
+        map.put(sum,map.getOrDefault(sum, 0)+1);//для 0 0 где t=0 {шаг1 res=1, шаг2 res=3}
     }
     return res;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-интервалы
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-int[][] test1 = {{1,3},{2,6},{8,10},{15,18}};  
-int[][] expected1 = {{1,6},{8,10},{15,18}};
-
-private static boolean isOverLapping(int[] a, int[] b){
-    return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
-}
-private static int[] mergeTwoIntervals(int[] a, int[] b){
-    return new int[]{a[0], Math.max(a[1], b[1])};
-}
-
-public static int[][] merge(int[][] intervals) {
-    if(intervals.length == 0) retutn new int[0][];
-    List<int[]> res = new ArrayList<>();
-    
-    Arrays.sort(intervals, Comarator.compareInt(a->a[0]));
-
-    res.add(intervals[0]);
-    for(int i = 1; i<intervals.length; i++){
-        int[] cur = intervals[i];
-        int[] last = res.get(res.size() - 1);
-        if(isOverLapping(cur, last)){
-            res.set(res.size()-1, mergeTwoIntervals(last, cur));
-        } else {
-            res.add(cur);
-        }
-    }
-    return res.toArray(new int[res.size()][]);
-}
-
-TreeMap<Integer, List<int[]> map = new TreeMap<>();
-// ключ нач интервала а значение список интерв с так началом
-for(int[] inter : intervals){
-    map.computeIfAbsent(interval[0], k->new ArrayList<>()).add(inter);
-}
-List<int[]> sortedIntervals = new ArrayList<>();
-for(List<int[]> list: map.getValues()){
-    sortedIntervals.addAll(list);
-}
-List<int[]> result = new ArrayList<>();  
-result.add(sortedIntervals.get(0)); 
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-int[][] test1 = {{0, 30}, {5, 10}, {15, 20}};
-int expected1 = 2;
-
-
-public static int minMeetingRoomsTwoPointer(int[][] intervals) {
-    if (intervals == null || intervals.length == 0 ) return 0;
-    int l = intervals.length;
-
-    int[] start = new int[l];
-    int[] end = new int[l];
-
-    for(int i = 0; i< l; i++){
-        start[i] = intervals[i][0];
-        end[i] = intervals[i][1];
-    }
-    Arrays.sort(start);
-    Arrays.sort(end);
-
-    int endMeet = 0;
-    int room = 0;
-    for(int i=0; i<l; i++){
-        if(start[i] < end[endMeet]){
-            room++;
-        } else {
-            endMeet++;
-        }
-    }
-    return room;
-}
-
-321435 == PriorityQueue
-     1
-    / \
-   3   2
-  / \   \
- 4   3   5
-
-public static int minMeetingRoomsTwoPointer(int[][] intervals) {
-    if (intervals == null || intervals.length == 0) return 0;
-    PriorityQueue<Integer> queueEnds = new PriorityQueue<>();
-    Arrays.sort(intervals, Comparator.comparingInt(a->a[0]));
-    queueEnds.add(intervals[0][1]);
-    for(int i =1; i<intervals.length; i++){
-        if(intervals[i][0] >= queueEnds.peek()){
-            queueEnds.pool();
-        }
-        queueEnds.add(intervals[i][1]);
-    }
-    return queueEnds.size();
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-Car Pooling 
-int[][] trips2 = {{2, 1, 5}, {3, 5, 7}}; 2-pas 1-start 5-end
-> int capacity2 = 5; res=true
-> int capacity1 = 4; res=false
-public boolean canCarPool(int[][] trips, int capacity) {
-        if(trips == null) return false;
-        int[] passengerChanges = new int[1001];
-        for(int[][] t: trips){
-            int pass = t[0];
-            int start = t[1];
-            int end = t[2];
-            passengerChanges[start] += pass;
-            passengerChanges[end] -= pass;
-        }
-        int curPass = 0;
-        for(int[] change : passengerChanges){
-            curPass += change; // #####
-            if (curPass > capacity) return false;
-        }
-        return true;
-}
-Время: O(N + M), где N — число поездок, M — максимальная точка маршрута (1000)
-Память: O(M) (фиксированный массив на 1001 элемент)
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-int[][] test1 = {{10, 16}, {2, 8}, {1, 6}, {7, 12}};  
-int expected1 = 2;
-
-Minimum Number of Arrows to Burst Balloons
-public int findMinArrowShots(int[][] balloons) {
-    if(balloons==null || balloons.length == 0)) return 0; //#####
-    Arrays.sort(balloons, Comparator.comparingInt(a->a[1]));
-    int end = balloons[0][1];
-    int arrow = 1;
-    for (int i = 1; i<balloons.length; i++){
-        if(balloons[i][0] > end){
-            arrow++;
-            end = balloons[i][1];
-        }
-    }
-    return arrow;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-int[][] segments1 = {{0, 5}, {-3, 2}, {7, 10}}; 
-int[] points1 = {1, 6};
-int[] expected1 = {2, 0};
-
-public static int[] countSegments(int[][] segments, int[] points) {
-    if(segments == null || segments.length == 0) return new int[0];
-    int l = segments.length;
-
-    int[] start = new int[l];
-    int[] end = new int[l];
-    int[] res = new int[points.length];
-    for(int i = 0; i<l; i++){
-        start[i] = Math.min(segments[i][0], segments[i][1]);
-        end[i]   = Math.max(segments[i][0], segments[i][1]);
-    }
-    Arrays.sort(start);// #######
-    Arrays.sort(end);// #######
-
-    for(int i = 0; i<points.length; i++){
-        int countS = lowerGreedyBand(start, points[i]);
-        int counte = apperBand(end, points[i]);
-        res[i] = countS - counte;
-    }
-    return res;
-}
-private int lowerGreedyBand(int[] ar, int key){
-    int left = 0;
-    int right = ar.length;
-    while(left<right){
-        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
-        if(key >= ar[mid]) left = mid +1;
-        else right = mid;
-    }
-    return left;
-}
-
-private int apperBand(int[] ar, int key){
-    int left = 0;
-    int right = ar.length;
-    while(left<right){
-        int mid = (left+right) >>> 1; // (a+b)/2 == a+(b-a)/2
-        if(key > ar[mid]) left = mid +1;
-        else right = mid;
-    }
-    return left;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-Add Two Numbers
-2->4->3 // число 342
-5->6->4 // число 465
-7->0->8 // res
-
-static class Node {  
-    int val;  
-    Node next;  
-    Node(int x) { val = x; }  
-}  
-  
-public Node addTwoNumbers(Node l1, Node l2) {
-    Node dummy = new Node(-100);
-    Node p1 = l1;
-    Node p2 = l2;
-    Node cur = dummy;
-    int carry = 0;
-
-    while(p1 != null || p2 != null){ //######
-        int x = (p1 != null) ? p1.val : 0;
-        int y = (p2 != null) ? p2.val : 0;
-        int sum = x + y + carry;
-        cur.next = new Node(sum%10); /// #####
-        cur = cur.next;
-        carry = sum / 10; // ####
-        if(p1 != null) p1 = p1.next;
-        if(p2 != null) p2 = p2.next;
-    }
-    if(carry > 0) cur.next = new Node(carry);
-    return dummy.next;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-public static int[] addNumbers(int[] arr1, int[] arr2) { 
-    int l1 = arr1.length;
-    int l2 = arr2.length;
-    int k = Math.max(l1, l2);
-    int[] res = new int[k+1]; // + 1 тк доп разряд
-
-    l1--; // ####
-    l2--; // ####
-
-    int carry = 0;
-    while(l1>=0 || l2 >=0){
-        int x = (l1>=0) ? arr1[l1] : 0;
-        int y = (l2>=0) ? arr2[l2] : 0;
-        int sum = x + y + carry;
-        carry = sum / 10;
-        res[k] = sum % 10;
-        l1--;
-        l2--;
-        k--;
-    }
-    if(carry == 0 ) return Arrays.copyOfRange(res, 1, res.length);
-    else res[k] = carry;
-
-    return res;
-}
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
