@@ -245,6 +245,46 @@ public static int[] addNumbers(int[] arr1, int[] arr2) {
     return res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Video Stitching
+
+// Решение 1: Жадный алгоритм с сортировкой  O(n log n) O(1)  
+int[][] clips3 = {{0,3}, {0,4}, {2,8}};  
+int time3 = 5;  
+int expected3 = 2;
+public int videoStitchingGreedy(int[][] clips, int time) {
+    Arrays.sort(clips. Comparator.comparingInt(a->a[0]));
+    int res = 0, farthest = 0, end = 0, i = 0;
+    while(farthest < time){
+        while(i< clips.length && clips[i][0] <= end){
+            farthest = Math.max(farthest, clips[i][1]);
+            i++;
+        }
+        if(farthest == end) return -1;
+        end = farthest;
+        res++;
+    }
+    return res;
+}
+// Решение 2: Массив максимального достижения O(n + time)   O(time)
+public int videoStitchingMaxReach(int[][] clips, int time) {
+    int[] buckets = new int[time +1 ]; // time =2 > 0,1,2 далее <=
+    for(int i : clips){
+        if(i[0] <= time){ //####
+            buckets[i[0]] = Math.max(buckets[i[0]], i[1]);
+        }
+    }
+    int res =0, farther = 0, end =0;
+    for(int i =0; i<=time; i++){
+        if( i > farther) return -1;
+        farther = Math.max(farther, buckets[i]);
+        if(i == end){
+            res++;
+            end = farther;
+        }
+    }
+    return res >= time ? res : -1;
+}
+- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
