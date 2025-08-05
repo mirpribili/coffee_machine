@@ -189,13 +189,28 @@ public static Node mergeKLists(Node[] list){
         for( int i = 0; i<list.length; i +=2){
             Node l1 = list[i];
             Node l2 = (i + 1) < list.length ? list[i+1] : null;
-            temp.add(merge(l1, l2));
+            temp.add(mergeLists(l1, l2));
         }
-        list = temp.toArray(new Node[0]);
+        list = temp.toArray(new Node[0]); // *
     }
     return list[0];
 }
+
+List<Node> temp = new ArrayList<>();
+temp.add(nodeA);
+temp.add(nodeB);
+Node[] array = temp.toArray(new Node[0]);
+// array теперь содержит {nodeA, nodeB}
+
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Список A: 1 → 2 → 9
+Список B: 3 → 9
+res 9
+
+Список A: 1 → 3 
+Список B: 2 → 4
+res null
+
 public static Node intersection(Node a, Node b){
     Node p1 = a;
     Node p2 = b;
@@ -237,6 +252,12 @@ public static Node finderCycle(Node head){
     return null;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Input: head = [2,1,5]
+Output: [5,5,0]
+
+inp {1, 7, 5, 1, 9, 2, 5, 1}
+res {7, 9, 9, 9, 0, 5, 0, 0}
+
 public static int[] greatNode(Node head){
     List<Integer> val = new ArrayList<>();
     while(head != null){
