@@ -597,7 +597,7 @@ public static void bubbleSort(int[] arr) {
     int n = arr.length - 1;
     for (int i = 0; i < n; i++){
         boolean swap = false;
-        for(int j = 0; j < n - i; j++){
+        for(int j = 0; j < n - i - 1; j++){
             if(arr[j] > arr[j+1]){
                 swap = true;
                 int temp = arr[j];
