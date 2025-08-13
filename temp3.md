@@ -6,6 +6,8 @@
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+Если существует товар с индексом `j > i` такой, что `prices[j] <= prices[i]` (где `j`— наименьший возможный индекс), итоговая цена = `prices[i] - prices[j]`.
+
  1475. Final Prices With a Special Discount in a Shop
 prices1 = {8, 4, 6, 2, 3};
 expected1 = {4, 2, 4, 2, 3};
@@ -43,6 +45,8 @@ public static String reverseWords(String s) {
     return res.toString(); // ####
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(n) O(n)
+
 907. Sum of Subarray Minimums
 int[] arr1 = {3, 1, 2, 4};
 int expected1 = 17; 
@@ -81,6 +85,8 @@ public int sumSubarrayMins(int[] arr) {
     return (int) res;
 }
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
+O(n) O(n)
+
 "10 + (7 - 2*3)*(12-4)/2", // 14
 public static int calculate(String s) {
     return evaluate(s.replaceAll(" ", ""), 0)[0];    //####
