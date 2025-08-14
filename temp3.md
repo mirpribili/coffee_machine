@@ -145,8 +145,9 @@ public class MinHeap {
     private void heapifyUp(int i){
         while(i > 0){
             int parentId = (i - 1) / 2;
-            if(heap.get(i) => heap.get(parentId)) break;
+            if(heap.get(i) >= heap.get(parentId)) break;
             Collections.swap(heap, i, parentId);
+            i = parentId;
         }
     }
     public int extractMin(){
@@ -167,8 +168,8 @@ public class MinHeap {
             int left = (i * 2) + 1;
             int right = (i * 2) + 2;
             int small = i;
-            if(left < size && heap.get(left) < heap.get(i)) small = left;
-            if(right < size && heap.get(rigt) < heap.get(i)) small = right;
+            if(left < size && heap.get(left) < heap.get(small)) small = left;
+            if(right < size && heap.get(right) < heap.get(small)) small = right;
             if(small == i) break;
             Collections.swap(heap, i, small);
             i = small;
@@ -223,6 +224,10 @@ public int[] topKFrequent(int[] nums, int k) {
     }
     return res;
 }
+
+обратная куча так
+new PriorityQueue<>((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 912. Sort an Array (Сортировка массива):
 через Counting Sort 
