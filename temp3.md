@@ -468,7 +468,7 @@ Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 public List<List<String>> groupAnagrams(String[] strs) {
     Map<String, List<String>> map = new HashMap<>(); // ####
     for(String s : strs){
-        //char[] c = s.toCharArray();
+        //char[] c = s.toCharArray(); // O(N * K log K) прост O(N * K)
         //Arrays.sort(c);
         //String key = new String(c); /// ####
 
@@ -496,6 +496,9 @@ public List<List<String>> groupAnagrams(String[] strs) {
 Шаг 3 (кратные 5): 2 3 x 5 x 7 x x x 11 x 13 x x x 17 x 19 x
 Шаг 4 (кратные 7): 2 3 x 5 x 7 x x x 11 x 13 x x x 17 x 19 x
 Простые: 2 3 5 7 11 13 17 19
+
+Временная сложность	O(n log log n)	Классическая оценка для решета Эратосфена
+O(n)
 
 public int countOrGetPrimes(int n) {
     if(n <= 2) return 0;
@@ -525,7 +528,7 @@ public int countOrGetPrimes(int n) {
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 //__int Max _2_147_483_647
 //__int Min -2_147_483_648
-testReverse(1_563_847_412, 0);
+testReverse( 1_563_847_412, 0);
 testReverse(120, 21); 
 testReverse(0, 0); 
 public static int reverse(int x) {
@@ -543,32 +546,6 @@ public static int reverse(int x) {
     }
     return res;
 }
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
-- -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
-
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
