@@ -97,7 +97,7 @@ public static boolean isThree(int n) {
     int root = (int) Math.pow(n, 0.5);
     return root * root == n && isSimple(root);
 }
-private static boolean isSimple(int n){ // isPrime
+private static boolean isSimple(int n){ // isPrime     13 % 2 == 1  13 % 3 == 1 == true
     if(n <2) return false;
     for(int i = 2; i*i <= n; i++){ // ####### <=
         int temp = n % i;
@@ -180,7 +180,7 @@ int[][] matrix = {
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 Чем отличается DFS от BFS?
 
-Особенность DFS (поиск в глубину)== стек (явно или рекурсия)
+Особенность DFS (Depth-First Search поиск в глубину)== стек (явно или рекурсия)
 Не гарантирует кратчайший путь
 Пример использования === Поиск компонент связности, топологическая сортировка, поиск циклов
 
