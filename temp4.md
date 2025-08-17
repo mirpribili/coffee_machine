@@ -345,7 +345,7 @@ private static boolean hasCycle(int i, boolean[] onPath, boolean[] visited, List
 int[][] prereq2 = {{1,0},{2,0},{3,1},{3,2}}; 
 0{1,2}, 1{3}, 2{3}
 int[] res2 = solver.findCourseOrder(4, prereq2); 
-Expected: [0, 1, 2, 3] or [0, 2, 1, 3] (dfs reverse)
+Expected: [0, 1, 2, 3] or [0, 2, 1, 3] (Bfs reverse)
 
 
 public int[] findCourseOrder(int numCourses, int[][] prerequisites) {
