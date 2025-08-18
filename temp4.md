@@ -472,7 +472,7 @@ public int maxAreaOfIsland(int[][] grid) {
     if(grid == null || grid.length == 0 || grid[0].length == 0) return 0; // java
     rows = grid.length;
     cols = grid[0].length;
-    b = grid;
+    b = copyGrid(grid);
     int res = 0;
     for(int i = 0; i<rows; i++){
         for(int j = 0; j<cols; j++){
@@ -493,6 +493,13 @@ private int dfs(int i, int j){
     res += dfs(i, j -1);
     return res;
 }
+private int[][] copyGrid(int[][] grid) {
+    int[][] copy = new int[grid.length][];
+    for (int i = 0; i < grid.length; i++) {
+        copy[i] = grid[i].clone();
+    }
+    return copy;
+}
 - -  -   -    -     -      -       -        -         -         -       -      -     -    -   -  - -
 int[][] grid3 = {
         {1, 0, 0},
@@ -506,6 +513,15 @@ int[][] grid2 = {
         {1, 1, 0}
 };
 int expected2 = 4;
+
+BFS посетит каждый элемент матрицы ровно один раз.
+
+Размер матрицы — n×n.
+Для каждой клетки проверяется её до 8 соседей.
+Поэтому временная сложность будет O(n²)
+Очередь может содержать до O(n²)
+
+
 private int[][] directions = new int[][]{
     {-1, -1}, {0, -1}, {1, -1},
     {-1,  0},          {1,  0},
